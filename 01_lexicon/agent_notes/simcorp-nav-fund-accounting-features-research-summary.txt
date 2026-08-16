@@ -1,0 +1,32 @@
+# SIMCORP DIMENSION / SIMCORP ONE — FUND ACCOUNTING & NAV FEATURES
+# Nguồn: Kết quả tìm kiếm web từ search query "SimCorp Dimension accounting NAV fund administration product features"
+# Ngày thu thập: 14/08/2026
+# LƯU Ý: Đây là tóm tắt từ search summary, KHÔNG phải nội dung trang SimCorp.com trực tiếp
+# URL SimCorp.com: Đã thử nhiều URL (404 từ simcorp.com/en/solutions/..., /platform/..., /investment-operations/...) — xem FETCH_LOG.md
+# [INFERENCE] — Chưa xác minh trực tiếp từ trang SimCorp
+
+---
+## CÁC TÍNH NĂNG CHÍNH: FUND ACCOUNTING & NAV (từ search summary)
+
+### 1. Core Fund Accounting & NAV
+- Automated NAV Calculation: workflow tự động hóa tính NAV hằng ngày, gồm: nạp dữ liệu (giao dịch, corporate action, giá thị trường, hoạt động nhà đầu tư), xử lý giao dịch, validation checks
+- Unified ABOR (Accounting Book of Record): nguồn kế toán tích hợp, real-time, hợp nhất cho tất cả loại tài sản
+- Multi-GAAP & Regulatory Support: hỗ trợ hơn 70 khung pháp lý và nhiều chuẩn kế toán (IFRS, local GAAP), báo cáo đa quốc gia
+- Automated Posting Schemes: cấu hình quy tắc ghi sổ cho giao dịch, thu nhập, corporate action; giảm journal entry thủ công; duy trì audit trail
+- Fee Management: quản lý phí phức tạp gồm management fee, performance fee, distribution waterfall
+
+### 2. Operational & Investment Features
+- Front-to-Back Integration: giảm phân mảnh dữ liệu giữa FO (trading/PM) và BO (accounting/settlement)
+- IBOR (Investment Book of Record): near real-time visibility về holdings và positions
+- Multi-Asset Support: equities, fixed income, derivatives, FX, alternatives (PE, real estate)
+- Reconciliation: tools tự động đối soát với custodian và nguồn bên ngoài
+
+### 3. Service & Deployment
+- Flexible Operating Models: triển khai in-house hoặc dùng Investment Accounting Services (managed)
+- AI-Powered Monitoring: AI giám sát thay đổi pháp lý đa quốc gia, cập nhật tự động
+
+## NGUỒN THAM CHIẾU TỪ SEARCH
+- ascenteum.org (SimCorp partner analysis)
+- simcorp.com (nhiều trang, nhưng URL cụ thể bị 404 khi fetch trực tiếp)
+- grasp.study (SimCorp NAV workflow)
+- dimensionalcommunity.com (SimCorp user community)

@@ -1,0 +1,28 @@
+# TT98/2020/TT-BTC — ĐIỀU 20: XÁC ĐỊNH GIÁ TRỊ TÀI SẢN RÒNG
+# Nguồn: Tìm kiếm web xác nhận nội dung pháp lý. URL tham chiếu: https://thuvienphapluat.vn/van-ban/Tai-chinh-nha-nuoc/Thong-tu-98-2020-TT-BTC-hoat-dong-quan-ly-quy-dau-tu-chung-khoan-456699.aspx
+# Ngày kiểm tra hiệu lực: 14/08/2026
+# Ghi chú: TT98/2020/TT-BTC đã được sửa đổi bởi TT136/2025/TT-BTC (hiệu lực từ 12/02/2026). Cần tra soát văn bản hợp nhất.
+# [CẢNH BÁO]: URL thuvienphapluat.vn bị redirect sai sang văn bản khác khi fetch tự động. Nội dung dưới đây được trích từ tìm kiếm web đã xác minh (search result summary), KHÔNG phải đọc trực tiếp văn bản.
+
+---
+ĐIỀU 20 — NGUYÊN TẮC XÁC ĐỊNH GIÁ TRỊ TÀI SẢN RÒNG (trích yếu từ search summary)
+
+Trách nhiệm:
+- Công ty quản lý quỹ có trách nhiệm xác định giá trị tài sản ròng (NAV) của quỹ
+- Xác định giá trị NAV trên một lô chứng chỉ quỹ ETF
+- Xác định giá trị NAV trên một chứng chỉ quỹ
+
+Công thức:
+  NAV = Tổng giá trị tài sản - Tổng nợ phải trả
+
+Phương pháp định giá tài sản:
+- Tổng giá trị tài sản được xác định theo GIÁ THỊ TRƯỜNG hoặc GIÁ TRỊ HỢP LÝ
+- Phải tuân thủ nguyên tắc tại PHỤ LỤC XIV ban hành kèm theo TT98
+- Phải tuân thủ quy định nội bộ trong SỔ TAY ĐỊNH GIÁ của quỹ
+  (hoặc được Ban đại diện quỹ chấp thuận bằng văn bản)
+
+Văn bản sửa đổi:
+- TT136/2025/TT-BTC: hiệu lực từ 12/02/2026
+  → Cần tra soát văn bản hợp nhất để xác nhận điều khoản hiện hành
+
+[INFERENCE] — Nội dung này được tổng hợp từ kết quả tìm kiếm web (search summary), chưa đọc trực tiếp từ văn bản gốc. CẦN XÁC MINH TRỰC TIẾP điều 20 toàn văn trước khi trích dẫn với [FACT].

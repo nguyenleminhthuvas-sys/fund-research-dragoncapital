@@ -1,0 +1,105 @@
+{
+  "capabilities": [
+    {
+      "ten": "Lớp bóc tách chứng từ dạng ảnh/scan/PDF",
+      "mo_ta_ngan": "Đọc và trích xuất trường dữ liệu có cấu trúc từ chứng từ dạng ảnh chụp, bản scan hoặc PDF — thay vì gõ tay lại nội dung vào hệ thống.",
+      "so_use_case_phuc_vu": 6,
+      "danh_sach_uc_id": [
+        "UC-003",
+        "UC-004",
+        "UC-016",
+        "UC-022",
+        "UC-023",
+        "UC-024"
+      ],
+      "du_lieu_dau_vao": "Chứng từ dạng ảnh chụp/bản scan/PDF: phiếu lệnh, giấy đề nghị giao dịch, sổ phụ ngân hàng, công văn phong tỏa, giấy tờ tùy thân, email đính kèm bản scan.",
+      "do_kho": "Thấp",
+      "ly_do_do_kho": "Phần lớn chứng từ dùng mẫu biểu cố định do công ty hoặc cơ quan quản lý phát hành, không cần huấn luyện mô hình riêng cho từng loại.",
+      "lam_o_dot_nao": "Đợt 1"
+    },
+    {
+      "ten": "Lớp đối chiếu dữ liệu đa nguồn",
+      "mo_ta_ngan": "So khớp hai hoặc nhiều tập dữ liệu cùng mô tả một sự kiện đến từ các nguồn khác nhau, phát hiện chênh lệch để con người xử lý tiếp.",
+      "so_use_case_phuc_vu": 5,
+      "danh_sach_uc_id": [
+        "UC-014",
+        "UC-016",
+        "UC-018",
+        "UC-020",
+        "UC-025"
+      ],
+      "du_lieu_dau_vao": "Hai tập dữ liệu song song cần so khớp: báo cáo nội bộ vs báo cáo Fund Administrator, sổ phụ ngân hàng vs sổ kế toán, kết quả giao dịch/danh sách chốt quyền từ VSDC vs dữ liệu nội bộ, thông tin nhà đầu tư vs danh sách đen AML.",
+      "do_kho": "Trung bình",
+      "ly_do_do_kho": "Thuật toán so khớp không phức tạp, nhưng dữ liệu đến từ nhiều hệ thống khác nhau (VSDC, ngân hàng giám sát, Fund Administrator) với định dạng chưa thống nhất — độ khó nằm ở chuẩn hoá/tích hợp, không phải ở mô hình AI.",
+      "lam_o_dot_nao": "Đợt 1"
+    },
+    {
+      "ten": "Lớp giám sát ngưỡng/quy tắc theo thời gian thực",
+      "mo_ta_ngan": "Theo dõi liên tục một số liệu vận hành hoặc rủi ro, so sánh với hạn mức/ngưỡng cảnh báo đã thiết lập và tự động phát cảnh báo khi vượt.",
+      "so_use_case_phuc_vu": 5,
+      "danh_sach_uc_id": [
+        "UC-008",
+        "UC-017",
+        "UC-035",
+        "UC-041",
+        "UC-043"
+      ],
+      "du_lieu_dau_vao": "Số liệu vận hành/rủi ro cập nhật liên tục (vị thế danh mục, giá thị trường, log giao dịch của đại lý chuyển nhượng, số liệu rủi ro theo bộ phận) đối chiếu với bảng hạn mức/ngưỡng cảnh báo đã phê duyệt.",
+      "do_kho": "Trung bình",
+      "ly_do_do_kho": "Logic so sánh ngưỡng đơn giản, nhưng cần dữ liệu cập nhật gần thời gian thực từ nhiều bộ phận nghiệp vụ khác hệ thống — độ khó nằm ở hạ tầng lấy dữ liệu, không phải ở mô hình AI.",
+      "lam_o_dot_nao": "Đợt 2"
+    },
+    {
+      "ten": "Lớp sinh văn bản/báo cáo theo mẫu từ dữ liệu có cấu trúc",
+      "mo_ta_ngan": "Điền số liệu đã có cấu trúc vào mẫu báo cáo hoặc văn bản chuẩn, soạn phần nội dung diễn giải dựa trên số liệu đó.",
+      "so_use_case_phuc_vu": 11,
+      "danh_sach_uc_id": [
+        "UC-005",
+        "UC-009",
+        "UC-011",
+        "UC-012",
+        "UC-021",
+        "UC-026",
+        "UC-029",
+        "UC-037",
+        "UC-038",
+        "UC-042",
+        "UC-045"
+      ],
+      "du_lieu_dau_vao": "Dữ liệu có cấu trúc đã sẵn sàng (kết quả giao dịch, dữ liệu vận hành, dữ liệu cảnh báo, dữ liệu giám sát rủi ro trong kỳ) cùng mẫu báo cáo/văn bản chuẩn của công ty hoặc theo quy định.",
+      "do_kho": "Trung bình",
+      "ly_do_do_kho": "Sinh nội dung từ dữ liệu có cấu trúc theo mẫu cố định là năng lực AI phổ biến, nhưng nhiều tác vụ trong nhóm này hiện chưa có mẫu báo cáo nội bộ thực tế để đối chiếu cấu trúc trước khi áp dụng.",
+      "lam_o_dot_nao": "Đợt 1"
+    },
+    {
+      "ten": "Lớp tổng hợp dữ liệu rủi ro/hiệu quả đa nguồn",
+      "mo_ta_ngan": "Thu thập và hợp nhất số liệu rời rạc từ nhiều bộ phận nghiệp vụ hoặc nhiều nguồn nội bộ vào một bảng theo dõi chung, chuẩn hoá theo cùng một cấu trúc.",
+      "so_use_case_phuc_vu": 4,
+      "danh_sach_uc_id": [
+        "UC-027",
+        "UC-028",
+        "UC-036",
+        "UC-039"
+      ],
+      "du_lieu_dau_vao": "Báo cáo/số liệu rời rạc từ nhiều bộ phận nghiệp vụ (rủi ro thị trường, thanh khoản, thanh toán, hiệu quả đầu tư, tuân thủ quy trình) — hiện đang ở nhiều định dạng khác nhau (Excel/email/hệ thống).",
+      "do_kho": "Trung bình",
+      "ly_do_do_kho": "Tổng hợp dữ liệu có cấu trúc là bài toán quen thuộc, nhưng phụ thuộc việc chuẩn hoá định dạng báo cáo của từng bộ phận nghiệp vụ trước khi hợp nhất được.",
+      "lam_o_dot_nao": "Đợt 1"
+    },
+    {
+      "ten": "Lớp mô hình định lượng trên dữ liệu thị trường/danh mục",
+      "mo_ta_ngan": "Áp dụng mô hình toán học/thống kê lên chuỗi dữ liệu giá, lãi suất hoặc thanh khoản lịch sử để nội suy, dự báo hoặc đề xuất kịch bản, thay vì chỉ trích xuất hay so khớp dữ liệu có sẵn.",
+      "so_use_case_phuc_vu": 4,
+      "danh_sach_uc_id": [
+        "UC-002",
+        "UC-013",
+        "UC-019",
+        "UC-034"
+      ],
+      "du_lieu_dau_vao": "Dữ liệu giá/lãi suất/thanh khoản lịch sử đủ dài theo thời gian, cùng tham số thị trường hiện tại (giá thị trường realtime, lãi suất vay ngắn hạn, dữ liệu giao dịch trái phiếu VBMA).",
+      "do_kho": "Cao",
+      "ly_do_do_kho": "Đòi hỏi mô hình toán học/thống kê chuyên sâu (nội suy đường cong lãi suất, mô phỏng chi phí giao dịch, hiệu chỉnh mô hình đo lường rủi ro) và dữ liệu lịch sử đủ dài để hiệu chỉnh — không chỉ là truy xuất hay so khớp dữ liệu như các lớp năng lực khác.",
+      "lam_o_dot_nao": "Đợt 3"
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "waves": [
+    {
+      "ten_dot": "Đợt 1 — Quick win vận hành hàng ngày",
+      "khoang_thoi_gian": "0-6 tháng",
+      "so_use_case": 16,
+      "danh_sach_uc_id": [
+        "UC-001",
+        "UC-003",
+        "UC-004",
+        "UC-009",
+        "UC-014",
+        "UC-016",
+        "UC-017",
+        "UC-018",
+        "UC-020",
+        "UC-023",
+        "UC-024",
+        "UC-026",
+        "UC-027",
+        "UC-028",
+        "UC-030",
+        "UC-040"
+      ],
+      "ket_qua_ky_vong": "Giảm thời gian xử lý thủ công ở các khâu vận hành hàng ngày có khối lượng lớn (định giá, nhận lệnh, đối soát, báo cáo UBCKNN) và tăng khả năng phát hiện sớm vi phạm hạn mức đầu tư hoặc rủi ro rửa tiền — nhóm nghiệp vụ này từng gây ra các khoản phạt thực tế cho công ty cùng ngành (MB Capital, Amber Capital) do xử lý thủ công chậm hoặc bỏ sót.",
+      "dieu_kien_can": "Dữ liệu đầu vào đã có sẵn ở định dạng có cấu trúc hoặc bán cấu trúc (bảng giá sàn, phiếu lệnh scan, sổ phụ ngân hàng PDF, danh sách VSDC); không cần đầu tư hạ tầng mới, chỉ cần thiết lập luồng tự động hoá quanh hệ thống hiện có.",
+      "rui_ro_neu_bo_qua": "Tiếp tục xử lý thủ công các khâu tần suất cao dẫn đến chậm trễ báo cáo, sai sót định giá/đối soát ảnh hưởng NAV, và có nguy cơ tái diễn các vi phạm hạn mức đầu tư/rửa tiền từng bị UBCKNN xử phạt ở các công ty cùng ngành."
+    },
+    {
+      "ten_dot": "Đợt 2 — Kết nối thành hệ thống giám sát liên tục",
+      "khoang_thoi_gian": "6-18 tháng",
+      "so_use_case": 12,
+      "danh_sach_uc_id": [
+        "UC-005",
+        "UC-006",
+        "UC-011",
+        "UC-012",
+        "UC-021",
+        "UC-025",
+        "UC-029",
+        "UC-035",
+        "UC-036",
+        "UC-041",
+        "UC-043",
+        "UC-046"
+      ],
+      "ket_qua_ky_vong": "Nối các luồng dữ liệu đã tự động hoá ở Đợt 1 (đặc biệt bảng giới hạn rủi ro từ UC-040) thành một hệ thống giám sát và báo cáo rủi ro liên tục, xuyên suốt nhiều bộ phận, đồng thời tự động hoá kế toán và giao tiếp khách hàng/đối tác — giảm phụ thuộc vào việc một vài nhân sự tổng hợp thủ công.",
+      "dieu_kien_can": "Đợt 1 phải hoàn thành trước, đặc biệt UC-040 (bảng giới hạn rủi ro) vì 3 use case của đợt này (UC-035, UC-041, UC-043) dùng trực tiếp bảng đó làm đầu vào. Cần tích hợp dữ liệu giữa các hệ thống hiện có (kế toán quỹ, hệ thống rủi ro, kênh liên lạc đối tác) thay vì chỉ xử lý một nguồn đơn lẻ như Đợt 1.",
+      "rui_ro_neu_bo_qua": "Các cảnh báo rủi ro và báo cáo vẫn rời rạc theo từng bộ phận, phát hiện vi phạm giới hạn rủi ro chậm hơn so với giám sát liên tục, và nhân sự tiếp tục tốn thời gian cho các tác vụ giao tiếp/tổng hợp lặp lại có thể tự động hoá."
+    },
+    {
+      "ten_dot": "Đợt 3 — Nghiệp vụ cần mô hình định lượng hoặc hạ tầng chưa sẵn có",
+      "khoang_thoi_gian": "18+ tháng",
+      "so_use_case": 15,
+      "danh_sach_uc_id": [
+        "UC-002",
+        "UC-007",
+        "UC-008",
+        "UC-010",
+        "UC-013",
+        "UC-015",
+        "UC-019",
+        "UC-022",
+        "UC-034",
+        "UC-037",
+        "UC-038",
+        "UC-039",
+        "UC-042",
+        "UC-044",
+        "UC-045"
+      ],
+      "ket_qua_ky_vong": "Hoàn thiện các mắt xích còn lại của chu trình quản trị rủi ro (từ xây dựng mô hình đo lường rủi ro, cập nhật chính sách, đến báo cáo cấp Hội đồng quản trị) và xử lý các nghiệp vụ đòi hỏi mô hình định lượng hoặc phán đoán chuyên môn cao — nhóm việc ít lặp lại hàng ngày nhưng ảnh hưởng lớn khi làm sai.",
+      "dieu_kien_can": "Đợt 2 phải hoàn thành trước với các use case nền: UC-006 (sổ kế toán tự động), UC-035/UC-036 (giám sát và tổng hợp rủi ro hàng ngày). Cần thêm dữ liệu lịch sử danh mục/thị trường đủ dài để hiệu chỉnh mô hình định lượng (UC-002, UC-034), và một bản chính sách quản trị rủi ro hiện hành thực tế của công ty (UC-044) — hiện chưa có sẵn theo ghi nhận tại BLOCK_04_RISK_SUMMARY.md.",
+      "rui_ro_neu_bo_qua": "Các báo cáo cấp cao (quý/năm) và chính sách quản trị rủi ro tiếp tục phụ thuộc hoàn toàn vào xử lý thủ công của nhân sự cấp quản lý — nhóm việc ít lặp lại nhưng ảnh hưởng lớn khi sai (chính sách quản trị rủi ro lạc hậu so với quy định, báo cáo Hội đồng quản trị thiếu kịp thời)."
+    }
+  ],
+  "dependencies": [
+    {
+      "tu": "UC-040",
+      "den": "UC-041",
+      "ly_do": "UC-041 cần bảng ngưỡng cảnh báo/giới hạn rủi ro (do UC-040 tạo ra) làm chuẩn so sánh trước khi phát cảnh báo vượt ngưỡng — nêu trong cột du_lieu_can_co của UC-041."
+    },
+    {
+      "tu": "UC-040",
+      "den": "UC-043",
+      "ly_do": "UC-043 cần bảng ngưỡng/giới hạn rủi ro theo quỹ (do UC-040 tạo ra) để đối chiếu danh mục từng quỹ và phát hiện vượt ngưỡng."
+    },
+    {
+      "tu": "UC-040",
+      "den": "UC-035",
+      "ly_do": "UC-035 cần bảng khẩu vị/giới hạn rủi ro (do UC-040 tạo ra) làm chuẩn để giám sát theo thời gian thực."
+    },
+    {
+      "tu": "UC-036",
+      "den": "UC-037",
+      "ly_do": "Báo cáo tháng/6 tháng (UC-037) cần dữ liệu giám sát rủi ro trong kỳ, vốn được UC-036 tổng hợp hàng ngày."
+    },
+    {
+      "tu": "UC-036",
+      "den": "UC-038",
+      "ly_do": "Báo cáo quý trình HĐQT (UC-038) cần dữ liệu giám sát rủi ro tích lũy trong kỳ, vốn được UC-036 tổng hợp hàng ngày."
+    },
+    {
+      "tu": "UC-035",
+      "den": "UC-037",
+      "ly_do": "Báo cáo giám sát khẩu vị/giới hạn rủi ro của UC-035 là một phần dữ liệu giám sát rủi ro trong kỳ mà UC-037 cần để tổng hợp báo cáo tháng."
+    },
+    {
+      "tu": "UC-037",
+      "den": "UC-038",
+      "ly_do": "ghi_chu_thieu của UC-038 nêu rõ 'Trùng một phần dữ liệu đầu vào với UC-037' — UC-038 cần đúng báo cáo QTRR hàng tháng trong quý mà UC-037 tạo ra."
+    },
+    {
+      "tu": "UC-044",
+      "den": "UC-042",
+      "ly_do": "UC-042 cần khung chiến lược/chính sách QTRR chuẩn của công ty làm nền để tùy biến cho từng quỹ — đây là đầu ra cập nhật hàng năm của UC-044."
+    },
+    {
+      "tu": "UC-044",
+      "den": "UC-045",
+      "ly_do": "UC-045 cần văn bản chính sách QTRR đã hoàn thiện để phổ biến — chính sách này là đầu ra của UC-044."
+    },
+    {
+      "tu": "UC-006",
+      "den": "UC-007",
+      "ly_do": "Task T-BO-016 (UC-007) có input 'Sổ kế toán quỹ + chứng từ giao dịch', đúng bằng đầu ra 'Sổ kế toán quỹ cập nhật' của task T-BO-015 (UC-006)."
+    },
+    {
+      "tu": "UC-006",
+      "den": "UC-010",
+      "ly_do": "Task T-BO-021 (UC-010) có input 'Sổ kế toán quỹ trong kỳ', đúng bằng đầu ra 'Sổ kế toán quỹ cập nhật' của task T-BO-015 (UC-006)."
+    }
+  ]
+}

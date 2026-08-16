@@ -1,0 +1,23 @@
+{
+    "Dragon Capital Group": {
+        "type": "Offshore Holding",
+        "established": 1994,
+        "role": "Parent company, managing offshore funds like VEIL",
+        "regulator": "FCA/Cayman (Unverified)",
+        "disclosure_obligation": "LSE rules for VEIL"
+    },
+    "DCVFM (Dragon Capital Vietfund Management)": {
+        "type": "Domestic AMC",
+        "established": 2021,
+        "upcom_code": "DCV",
+        "role": "Managing domestic mutual funds and ETFs",
+        "regulator": "SSC (State Securities Commission of Vietnam)",
+        "disclosure_obligation": "HOSE/HNX/UPCoM/SSC rules"
+    },
+    "Ecosystem Entities": {
+        "type": "Satellites",
+        "role": "Support, proprietary trading, tech",
+        "regulator": "Various",
+        "disclosure_obligation": "Various"
+    }
+}

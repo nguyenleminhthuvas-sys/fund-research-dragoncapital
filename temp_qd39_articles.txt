@@ -1,0 +1,141 @@
+=== Điều 4. Chứng từ liên quan đến hoạt động bù trừ , thanh toán giao dịch  ===
+
+chứng khoán 
+1. Các chứng từ liên quan đến hoạt động bù trừ , thanh toán giao dịch chứng 
+khoán áp dụng dưới dạng chứng từ điện tử  được gửi qua cổng giao tiếp điện tử , 
+cổng giao tiếp trực tuyến. Danh mục chứng từ thanh toán gửi qua cổng giao tiếp 
+trực tuyến (FileAct) được quy định chi tiết tại Phụ lục 02 kèm theo Quy chế này. 
+Trong trường hợp cần thiết, VSDC , TVLK, TCMTKTT, NHTT  có thể đề nghị 
+4 
+ 
+ 
+chuyển đổi chứng từ dưới dạng chứng từ điện tử sang chứng từ giấy theo quy định 
+của ph
+...
+
+=== Điều 5.  Đối chiếu, xác nhận kết quả giao dịch  ===
+
+1. Sau khi nhận dữ liệu về kết quả giao dịch từ SGDCK, VSDC gửi thông 
+báo cho TVLK, TCMTKTT; xác định nghĩa vụ thanh toán giao dịch chứng khoán 
+tạm tính và thông báo cho TVLK, TCMTKTT theo quy định tại khoản 1 Điều 40c 
+Thông tư số 119/2020/TT-BTC.  
+2. TVLK, TCMTKTT có trách nhiệm đối chiếu chi tiết giao dịch giữa thông 
+tin lệnh giao dịch được lưu giữ tại TVLK, TCMTKTT với thông báo của VSDC 
+theo quy định tại khoản 1 Điều này: 
+a) Trường hợp có thông tin giao dịch sai , TVLK, TCMTKTT thông
+...
+
+=== Điều 6. Xác nhận khả năng thanh toán tiền và phong tỏa tiền đảm bảo  ===
+
+khả năng thanh toán giao dịch trái phiếu doanh nghiệp 
+1. Chậm nhất 15h15 ngày T, VSDC thông báo nghĩa vụ thanh toán giao dịch 
+chứng khoán tạm tính cho NHTT theo phương thức quy định tại Biên bản phối hợp 
+hoạt động giữa VSDC và NHTT. 
+2. TVLK, TCMTKTT có trách nhiệm xác nhận với VSDC về việc có đủ tiền 
+hoặc không có đủ tiền để thanh toán giao dịch trái phiếu doanh nghiệp theo quy 
+định tại khoản 1 Điều 40d Thông tư số 119/2020/TT-BTC. 
+2.1. Trường hợp TVLK, TCMTKTT có đủ tiền thanh toán theo
+...
+
+=== Điều 7. Xác nhận khả năng thanh toán tiền và phong tỏa tiền đảm bảo  ===
+
+khả năng thanh toán giao dịch cổ phiếu, chứng chỉ quỹ, chứng quyền có bảo đảm 
+1. Chậm nhất 15h00 ngày T+1, VSDC thông báo nghĩa  vụ thanh toán giao 
+dịch chứng khoán tạm tính  cho NHTT theo phương thức quy định tại Biên bản 
+phối hợp hoạt động giữa VSDC và NHTT. 
+2. TVLK, TCMTKTT có trách nhiệm xác nhận với VSDC về việc có đủ tiền 
+hoặc không có đủ tiền để thanh toán giao dịch cổ phiếu, chứng chỉ quỹ, chứng quyền 
+có bảo đảm theo quy định tại khoản 1 Điều 40d Thông tư số 119/2020/TT-BTC. 
+2.1.
+...
+
+=== Điều 10.  Xử lý để thanh toán thay cho giao dịch của NĐTNPR theo quy  ===
+
+định tại điểm b khoản 2 Điều 40k Thông tư số 119/2020/TT-BTC  
+1. Chậm nhất 09h30 ngày thanh toán (T+2), trường hợp NĐTNPR không có 
+đủ tiền thanh toán, NHLK gửi thông báo đề nghị CTCK để CTCK sử dụng tiền của 
+mình chuyển về tài khoản tiền gửi thanh toán bù trừ giao dịch chứng khoán môi giới 
+nước ngoài của NHLK tại NHTT để thanh toán thay cho  NĐTNPR, đồng thời gửi 
+9 
+ 
+ 
+thông báo cho VSDC trong cùng 01 email gửi cho CTCK. Nội dung thông báo phải 
+có thông tin về giao dịch thiếu tiền (mã bả
+...
+
+=== Điều 11.  Các trường hợp mất khả năng thanh toán giao dịch chứng khoán  ===
+
+1. Các trường hợp mất khả năng thanh toán tiền bao gồm: 
+a) TVLK mất khả năng thanh toán theo quy định tại khoản 5 Điều 10 Quy 
+chế này. 
+b) Thời điểm 10h30 ngày thanh toán, TVLK không có đủ tiền trên tài khoản 
+tiền gửi thanh toán bù trừ giao dịch chứng khoán của TVLK tại NHTT để chuẩn bị 
+thực hiện thanh toán.  
+2. Các trường hợp m ất khả năng thanh toán  chứng khoán bao gồm: TVLK 
+mất khả năng thanh toán chứng khoán xác định theo quy định tại khoản 6 Điều 40đ 
+và khoản 2 Điều 40e Thông tư số
+...
+
+=== Điều 12.  Xác nhận hoàn tất thanh toán giao dịch chứng khoán  ===
+
+1. Sau khi hoàn tất thanh toán giao dịch chứng khoán, VSDC gửi xác nhận 
+hoàn tất thanh toán giao dịch chứng khoán cho TVLK, TCMTKTT. 
+2. TVLK phải thực hiện phân bổ tiền và chứng khoán cho khách hàng ngay 
+sau khi VSDC hoàn tất thanh toán chứng khoán và NHTT hoàn tất thanh toán tiền, 
+đảm bảo hoàn tất việc phân bổ trước 13h00 ngày thanh toán; đồng thời thông báo 
+cho VSDC về kết quả thực hiện chậm nhất vào 16h30 ngày thanh toán.  
+CHƯƠNG III 
+HỖ TRỢ XỬ LÝ MẤT KHẢ NĂNG THANH TOÁN 
+
+...
+
+=== Điều 13. Hỗ trợ xử lý mất khả năng thanh toán tiền giao dịch chứng khoán   ===
+
+1. Đối với trường hợp sử dụng tiền vay từ Quỹ hỗ trợ thanh toán: 
+a) NHTT căn cứ vào công văn đề nghị hỗ trợ thanh toán tiền của VSDC thực 
+hiện chuyển tiền từ tài khoản Quỹ hỗ trợ thanh toán sang tài khoản tiền gửi thanh 
+toán bù trừ giao dịch chứng khoán của TVLK mất khả năng thanh toán. Trường 
+hợp TVLK mất khả năng thanh toán là CTCK theo quy định tại khoản 5 Điều 10 
+quy chế này, NHTT tiếp tục chuyển số tiền này từ tài khoản tiền gửi thanh toán bù 
+trừ giao dịch chứng khoán của CTCK sang t
+...
+
+=== Điều 14.  Hỗ trợ xử lý mất khả năng thanh toán chứng khoán   ===
+
+1. TVLK mất khả năng thanh toán chứng khoán phải hoàn tất việc vay 
+chứng khoán theo quy định tại điểm a khoản 3 Điều 40g Thông tư số 
+119/2020/TT-BTC trước 09h00 ngày thanh toán.  
+2. Sau thời hạn nêu tại khoản 1 Điều này, VSDC thực hiện xác định các giao 
+dịch thiếu chứng khoán  theo quy định tại Điều 15 Quy chế này để lùi thời hạn 
+thanh toán hoặc loại bỏ thanh toán theo quy định tại các Điều 40h, 40i Thông tư số 
+119/2020/TT-BTC và các Điều 16, 17 Quy chế này. 
+
+...
+
+=== Điều 16.  Lùi thời hạn thanh toán   ===
+
+1. VSDC thực hiện lùi thời hạn thanh toán đối với giao dịch thiếu chứng khoán 
+theo nguyên tắc quy định tại khoản 3 Điều 40h Thông tư số 119/2020/TT-BTC. 
+2. Giao dịch lùi thời hạn thanh toán có thể được thanh toán toàn bộ hoặc 
+từng phần tuỳ vào  số lượng chứng khoán TVLK vay được.  Thời điểm xác định 
+giao dịch lùi thời hạn được thanh toán là chậm nhất 10h30 ngày thanh toán.  
+3. Sau khi hoàn tất lùi thời hạn thanh toán , VSDC gửi Thông báo cho 
+TVLK, SGDCK có liên quan. 
+4. Thời gian, trình
+...
+
+=== Điều 17.  Loại bỏ thanh toán giao dịch chứng khoán   ===
+
+1. VSDC thực hiện loại bỏ thanh toán giao dịch chứng khoán theo quy định 
+tại Điều 40i Thông tư số 119/2020/TT-BTC. 
+2. Thời gian loại bỏ thanh toán giao dịch: 
+13 
+ 
+ 
+a) Chậm nhất 15h30 ngày giao dịch đối với các trường hợp quy định tại 
+điểm d, đ, e, g khoản 1 Điều 40i Thông tư số 119/2020/TT-BTC. 
+b) Chậm nhất 16h00 ngày giao dịch đối với giao dịch trái phiếu doanh 
+nghiệp và 16h00 ngày T+1 đối với giao dịch cổ phiếu, chứng chỉ quỹ, chứng quyền 
+có bảo đảm đối với các trường hợp quy định tạ
+...
+

@@ -1,0 +1,45 @@
+task_id,mo_ta_ngan,khoi_chuc_nang,ly_do_reject
+T-BO-003,Tính giá trị tiền gửi kỳ hạn bằng vốn gốc cộng lãi dự thu,NAV & Fund Accounting,"Nghiệp vụ toán học đơn giản (cộng/nhân), có công thức rõ ràng, chỉ cần RPA/Code, không cần năng lực suy luận của AI."
+T-BO-004,Tính toán NAV,NAV & Fund Accounting,"Phép tính cộng trừ nhân chia tổng tài sản và nợ, hoàn toàn không cần AI."
+T-BO-005,Gửi kết quả cho ngân hàng giám sát,NAV & Fund Accounting,"Quy trình gửi email/workflow thông thường, gửi file đính kèm, không cần AI."
+T-BO-006,Đăng NAV lên trang web,NAV & Fund Accounting,"RPA tự động đẩy file lên portal hoặc API, không cần mô hình ngôn ngữ/thị giác."
+T-BO-008,Tính số lượng CCQ phân bổ,NAV & Fund Accounting,"Tính toán chia số tiền cho NAV, quy tắc làm tròn cứng, không cần AI."
+T-BO-009,Kiểm tra CCQ đủ trên tài khoản để bán,NAV & Fund Accounting,Lệnh IF đơn giản so sánh số dư tài khoản và số lượng bán.
+T-BO-010,Chuyển khoản trừ phí thuế,NAV & Fund Accounting,"Giao tiếp với API ngân hàng/core để khấu trừ, không cần suy luận AI."
+T-BO-011,"Chốt danh sách nhà đầu tư, chia cổ tức",NAV & Fund Accounting,"Logic lọc SQL/Excel và phép nhân theo tỷ lệ sở hữu, không cần AI."
+T-BO-012,Tính phí quản lý 1%/năm,NAV & Fund Accounting,"Chỉ là phép nhân tỷ lệ với NAV, không cần suy luận."
+T-BO-017,Thực hiện tính NAV theo đúng quy định TT98,NAV & Fund Accounting,"Toán học tính NAV tuân thủ đúng công thức luật, không được suy luận khác, không cần AI."
+T-BO-018,"Kiểm soát thời gian nhận lệnh, hủy lệnh",NAV & Fund Accounting,Rule-based RPA: Hủy lệnh nếu thời gian > 14:45. Không AI.
+T-BO-025,Thực hiện công việc vận hành hàng ngày theo phân công,NAV & Fund Accounting,"Mô tả quá chung chung (catch-all task), không thể xác định cụ thể AI làm gì."
+T-BO-027,Nhập bút toán điều chỉnh cuối tháng,NAV & Fund Accounting,"Tính năng accounting thuần túy, định khoản cố định, ERP đã có sẵn automation."
+T-BO-029,"Thu thập giá tài sản, áp dụng định giá",NAV & Fund Accounting,Đã tạo Use case ở T-BO-001. Trùng lặp ngữ nghĩa do lấy từ JD khác.
+T-BO-033,Xác nhận có đủ tiền/chứng khoán thanh toán,Reconciliation & Settlement,Lệnh IF so sánh đơn giản giữa Tổng tiền phải trả và Số dư hiện có. Không cần AI.
+T-BO-035,Thực hiện vay chứng khoán trên VSDC,Reconciliation & Settlement,"Quy trình thủ tục hành chính, nộp form lên hệ thống VSDC, RPA là đủ."
+T-BO-036,Phối hợp VSDC lùi/loại bỏ giao dịch,Reconciliation & Settlement,"Quy trình ngoại lệ yêu cầu con người gọi điện/gửi văn bản làm việc trực tiếp, AI không can thiệp được."
+T-BO-037,Phân bổ tiền và chứng khoán về tài khoản khách hàng,Reconciliation & Settlement,Core chứng khoán tự động hạch toán chia tiền/chứng khoán sau khi nhận từ VSDC. Không cần AI.
+T-BO-039,Quản lý thanh khoản chứng chỉ tiền gửi tại NH,Reconciliation & Settlement,"Nghiệp vụ trading tiền tệ đơn giản, thực hiện theo chỉ đạo, ít tác vụ lặp tốn thời gian cho AI."
+T-BO-041,Nhận ký gửi và bảo quản chứng khoán,Reconciliation & Settlement,"Thao tác trên Core/VSDC system, nhập liệu mã và số lượng, không có tính chất suy luận."
+T-BO-042,Rút chứng khoán khỏi hệ thống,Reconciliation & Settlement,Thao tác trên Core/VSDC system.
+T-BO-043,Chuyển khoản chứng khoán không qua giao dịch,Reconciliation & Settlement,Thủ tục hành chính/nhập form trên VSDC.
+T-BO-045,Tính toán đối chiếu hoa hồng cho đại lý phân phối,Transfer Agency & Nhà đầu tư,"Tính theo công thức % trên doanh số, đã có sẵn hệ thống, không cần AI."
+T-BO-046,Thực hiện nghiệp vụ giao dịch CCQ,NAV & Fund Accounting,"Mô tả quá chung chung, không xác định được AI làm gì."
+T-BO-047,"Xác nhận quyền sở hữu, lập sổ đăng ký",Transfer Agency & Nhà đầu tư,"Sổ đăng ký được sinh tự động bằng SQL sau khi lệnh hoàn tất, không cần AI suy luận."
+T-BO-052,Hướng dẫn tiếp nhận hồ sơ,Transfer Agency & Nhà đầu tư,"Đây là giao tiếp khách hàng (Customer Service) và thủ tục hành chính, overlap với T-BO-049."
+T-BO-053,Tính toán thu phí giao dịch CCQ,Transfer Agency & Nhà đầu tư,"Lệnh IF và phép nhân dựa trên biểu phí, không cần AI."
+T-BO-059,Dự thảo chiến lược và chính sách quản trị rủi ro trình hội đồng quản trị,Performance & Risk Management,"Bản chất là soạn thảo văn bản chiến lược mang tính xét đoán quản trị cấp cao (judgment); nội dung tương tự đã có UC-042 cho phạm vi quỹ, tránh trùng lặp ở cấp công ty."
+T-BO-062,Báo cáo UBCKNN danh sách nhân sự phụ trách quản trị rủi ro trong 7 ngày khi có thay đổi,Performance & Risk Management,"Tần suất phát sinh thấp (chỉ khi có thay đổi nhân sự), khối lượng nhỏ (điền 1 mẫu biểu ngắn), giá trị tự động hoá không đáng kể so với chi phí triển khai AI."
+T-BO-063,"Quyết định cơ cấu tổ chức, phê duyệt chiến lược/chính sách và giám sát hệ thống quản trị rủi ro",Performance & Risk Management,"Thẩm quyền quyết định thuộc Hội đồng quản trị theo luật, không phải tác vụ xử lý thông tin mà AI có thể hỗ trợ trực tiếp."
+T-BO-064,Phân công thành viên hoặc thành lập tiểu ban phụ trách quản trị rủi ro,Performance & Risk Management,"Quyết định nhân sự nội bộ một lần, không có dữ liệu lặp lại để AI xử lý."
+T-BO-065,"Rà soát, thẩm định và tham mưu cho HĐQT về cơ cấu tổ chức, chiến lược, chính sách quản trị rủi ro",Performance & Risk Management,"Bản chất là thẩm định/tham mưu mang tính xét đoán chuyên môn cấp cao, không có input dữ liệu cấu trúc rõ ràng; phần đánh giá định lượng đã bao phủ bởi UC-039."
+T-BO-067,Ban hành quy chế hoạt động của tiểu ban quản trị rủi ro,Performance & Risk Management,"Soạn thảo văn bản quản trị nội bộ một lần, phạm vi hẹp, không lặp lại, giá trị tự động hoá thấp."
+T-BO-068,Tổ chức triển khai thực hiện chiến lược và chính sách quản trị rủi ro sau khi được phê duyệt,Performance & Risk Management,"Hoạt động quản lý tổ chức/con người (điều phối triển khai), không phải tác vụ xử lý dữ liệu cụ thể để AI can thiệp."
+T-BO-069,"Giám sát tuân thủ chiến lược, chính sách QTRR; bố trí nhân sự và phổ biến kiến thức quản lý rủi ro",Performance & Risk Management,"Gộp nhiều nhiệm vụ khác bản chất (bố trí nhân sự thuộc quản lý con người, phổ biến kiến thức đã bao phủ một phần bởi UC-045); phần còn lại quá chung chung để xác định AI làm gì cụ thể."
+T-BO-071,Phân công thành viên Ban điều hành phụ trách công tác quản trị rủi ro,Performance & Risk Management,"Quyết định nhân sự nội bộ một lần, không có dữ liệu để AI xử lý."
+T-BO-072,Thành lập bộ phận quản trị rủi ro hoặc giao bộ phận kiểm soát nội bộ thực hiện nhiệm vụ QTRR,Performance & Risk Management,"Quyết định tổ chức một lần, không lặp lại, không có tác vụ xử lý thông tin cho AI."
+T-BO-077,Bộ phận kiểm toán nội bộ và kiểm soát nội bộ tham gia công tác quản trị rủi ro theo Thông tư 212/2012/TT-BTC,Performance & Risk Management,"Điều khoản dẫn chiếu sang văn bản khác, không mô tả hành động nghiệp vụ cụ thể để xác định vai trò AI."
+T-BO-078,"Bảo đảm công tác quản trị rủi ro toàn công ty tuân thủ chính sách, quy trình đã phê duyệt",Performance & Risk Management,"Trách nhiệm giám sát mang tính tổng quát, không mô tả rõ đầu vào/đầu ra cụ thể; phần giám sát rủi ro cụ thể đã có UC-035/UC-036."
+T-BO-079,Tuân thủ chính sách và quy trình quản lý rủi ro trong hoạt động nghiệp vụ,Performance & Risk Management,"Là nghĩa vụ tuân thủ chung áp dụng cho mọi bộ phận nghiệp vụ, không phải một tác vụ xử lý thông tin cụ thể để AI can thiệp."
+T-BO-080,Đề xuất khẩu vị rủi ro và giới hạn rủi ro cấu thành trong hoạt động nghiệp vụ,Performance & Risk Management,"Đề xuất mang tính xây dựng khái niệm ban đầu, thực hiện đơn lẻ theo từng bộ phận nghiệp vụ; phần tính toán giới hạn rủi ro đã bao phủ bởi UC-040."
+T-BO-081,"Kiểm soát, giám sát và báo cáo rủi ro phát sinh tại bộ phận nghiệp vụ",Performance & Risk Management,"Trùng lặp bản chất với T-BO-074/T-BO-075 (bộ phận QTRR đã tổng hợp giám sát rủi ro tương tự ở cấp toàn công ty), tránh sinh use case trùng."
+T-BO-082,Phân công đầu mối quản trị rủi ro tại bộ phận nghiệp vụ,Performance & Risk Management,"Quyết định nhân sự nội bộ tại từng bộ phận, không có dữ liệu để AI xử lý."
+T-BO-085,Rà soát và cập nhật quy trình quản lý rủi ro thường xuyên,Performance & Risk Management,Văn bản không nêu tần suất/khối lượng cụ thể để ước tính giá trị tự động hoá; cần phỏng vấn thêm trước khi xác định vai trò AI.
