@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Dựng FINAL_REPORT.html từ report_template.html + dữ liệu trong _data/.
+Dựng index.html từ report_template.html + dữ liệu trong _data/.
 Chạy: python3 build_report.py
 Chỉ đọc CSV và bơm JSON vào template. Không sinh nội dung nghiệp vụ.
 """
@@ -9,7 +9,7 @@ import csv, json, os, datetime, re
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 D    = os.path.join(BASE, "_data")
-OUT  = os.path.join(BASE, "12_report", "FINAL_REPORT.html")
+OUT  = os.path.join(BASE, "12_report", "index.html")
 TPL  = os.path.join(BASE, "report_template.html")
 
 def read(p):
