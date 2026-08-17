@@ -25,3 +25,10 @@
 | T6.2 | A11 | T6.1 | **DONE** | Top use case & lộ trình 3 đợt — `_data/roadmap.json`, hiển thị Phần 06 báo cáo. |
 | T7.1 | A12 | T2.x | **DONE (17/08/2026)** | Red Team 10-hạng-mục đã chạy trên dữ liệu cuối (43 UC/87 task). 2 finding thực chất — trích quá 15 từ (đã sửa 11 dòng) và quy tắc xếp rổ `ro` không khớp tài liệu kế hoạch gốc (đã cập nhật tài liệu cho khớp thực tế). Không phát hiện bịa nguồn/bịa số/bịa chức danh. Chi tiết: `00_control/AUDIT_LOG.md` mục "AUDIT PHASE 3". |
 | T7.2 | A13 | T6.2, T7.1 | **DONE, VỚI GHI CHÚ** | Báo cáo tổng hợp — `12_report/FINAL_REPORT.html` / `index.html` (bản v2.1, 17/08/2026). Đã audit + sửa lỗi kỹ thuật (xem CHANGELOG 17/08/2026) nhưng T7.1 chưa đóng và OQ-002 chưa RESOLVED — báo cáo tự nhận là giai đoạn "Catalogue", chưa phải bản triển khai chi tiết (xem banner đầu trang). |
+| T8.0 | Claude | T7.2 | **DONE (17/08/2026)** | Lập kế hoạch chi tiết cho 4 khối chưa nghiên cứu (Corporate Actions, Client Reporting, Compliance & Regulatory Reporting, Data Management) — xem `00_control/PHASE2_PLAN.md`. Chưa chạy, chờ Thư xác nhận OQ-003. |
+| T8.1 | — | T8.0, OQ-003 | TODO (chờ xác nhận) | Giai đoạn A — Gom & verify nguồn cho 4 khối (ưu tiên Compliance & Regulatory Reporting trước theo đề xuất trong PHASE2_PLAN.md Mục 5) |
+| T8.2 | — | T8.1 | TODO | Giai đoạn B — Bóc tách tác vụ, nối vào `task_registry.csv`, kiểm tra ranh giới với 87 task hiện có (PHASE2_PLAN.md Mục 2) |
+| T8.3 | — | T8.2 | TODO | GATE 2 — kiểm tra độ sâu từng khối mới trước khi sinh use case |
+| T8.4 | — | T8.3 | TODO | Giai đoạn C — Sinh & chấm điểm use case, nối vào `usecase_registry.csv` |
+| T8.5 | — | T8.4 | TODO | Giai đoạn D — Red Team 10 hạng mục trên phần mới + tích hợp báo cáo v3.0 |
+| T8.6 | — | T8.5 | TODO (không bắt buộc) | Giai đoạn E — Phỏng vấn xác nhận, nâng use case khối mới lên VERIFIED |
