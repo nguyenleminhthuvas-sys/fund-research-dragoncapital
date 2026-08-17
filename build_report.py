@@ -141,7 +141,7 @@ repl = {
                   f"Việt Nam: {n_task} tác vụ vận hành được bóc tách từ nguồn sơ cấp, "
                   f"{n_uc} cơ hội ứng dụng AI được chấm điểm và xếp thứ tự ưu tiên.",
     "{{ORG}}":    "Sunext AI Lab",
-    "{{VERSION}}": "v2.2",
+    "{{VERSION}}": "v3.0",
     "{{BYLINE}}": f"Chốt dữ liệu {today}  ·  {n_task} tác vụ  ·  {n_uc} use case  ·  "
                   f"{len(sources)} nguồn  ·  {len(blocks)}/8 khối chức năng",
     "{{DD_N}}":   str(META["deep_dive_n"]),

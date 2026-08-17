@@ -110,3 +110,18 @@ Chạy đúng T7.1 (chưa từng làm trước đây — xem cảnh báo ở m�
 
 ### Kết luận T7.1
 2 finding thực chất: [AUD-007] Trích quá 15 từ (MED, đã đóng — đã sửa) và [AUD-008] Quy tắc xếp rổ không khớp tài liệu (HIGH về mặt quản trị dữ liệu, đã đóng bằng cách cập nhật tài liệu cho khớp thực tế thay vì sửa dữ liệu). Không phát hiện bịa nguồn/bịa số/bịa chức danh/use case rỗng/trùng lặp. **T7.1 → DONE** (xem `TASK_BOARD.md`).
+
+## AUDIT 2026-08-17 (tiếp) — Khối Compliance & Regulatory Reporting (T8.5, đợt mở rộng Phase 2)
+
+**Phạm vi:** 11 task mới (T-CO-001→011), 5 nguồn mới (S-COMP-001→005), 9 use case mới (UC-047→055) — trước khi merge vào registry chính.
+
+- **Hạng mục 1 (Bịa nguồn):** PASS. 0/25 (11 task + 9 UC referencing source_ids, một số dùng chung) có source_id không tồn tại. Đối chiếu tay 1 trích dẫn (T-CO-001, Điều 90.4) với nguyên văn PDF Công báo — khớp chính xác từng chữ.
+- **Hạng mục 2 (Bịa số):** PASS. Số liệu tìm được (125tr/85tr/60tr phạt HD Capital, ngưỡng 5%/1% sở hữu, hạn 24h/3 ngày làm việc) đều gắn nguồn cụ thể, có kỳ/căn cứ rõ.
+- **Hạng mục 3 (Nhãn FACT/INFERENCE):** PASS. 11 task mới: 8 REG/2 FACT/1 INFERENCE — nhãn INFERENCE (T-CO-011, pre-trade check) có lý do rõ ràng (pháp luật VN chỉ quy định kết quả, không quy định cơ chế), đúng tinh thần GLOBAL_RULES mục 4.
+- **Hạng mục 5 (Use case rỗng):** PASS. 0/9 UC thiếu field cốt lõi.
+- **Hạng mục 6 (Trùng lặp):** PASS. 0 task_id bị 2 UC dùng chung, 0 tên UC trùng trong 52 dòng. 2 task cân nhắc trùng với dữ liệu cũ (T-BO-020, T-BO-055) đã bị loại đúng quy trình, ghi vào `REJECTED.csv`.
+- **Hạng mục 8 (Trích quá 15 từ):** [FINDING, ĐÃ SỬA] 4/11 dòng `chi_tiet_ref` (T-CO-005/006/007/008) đều 17 từ dù agent tự ghi "cắt còn ≤15 từ" — đếm sai. Đã cắt lại đúng ≤15 từ.
+- **Hạng mục 9 (Logic gãy):** PASS. Công thức `tong_diem` khớp đúng 9/9 dòng mới; ngưỡng xếp rổ `ro` khớp đúng 9/9 theo quy tắc thực tế đã xác định ở AUDIT PHASE 3.
+- **Phát hiện thêm ngoài 10 hạng mục:** `PHASE2_PLAN.md` Mục 1.1 gợi ý sai toàn bộ số điều khoản luật (xem `CHANGELOG.md` 17/08/2026 v3.0 để biết chi tiết) — agent không ép trích theo gợi ý sai mà tự đọc toàn văn để tìm điều khoản đúng, đúng tinh thần chống bịa của dự án.
+
+**Kết luận:** 1 finding MED đã sửa (trích quá 15 từ). Không phát hiện bịa nguồn/bịa số/use case rỗng/trùng lặp trong đợt mở rộng này. Đã merge vào registry chính (98 task/52 UC/40 nguồn/5 khối) và rebuild báo cáo v3.0.
