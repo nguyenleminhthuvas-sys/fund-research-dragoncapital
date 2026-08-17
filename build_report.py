@@ -9,8 +9,28 @@ import csv, json, os, datetime, re
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 D    = os.path.join(BASE, "_data")
-OUT  = os.path.join(BASE, "12_report", "index.html")
+DD   = os.path.join(BASE, "12_deep_dives")
+# Hai file output phải luôn giống hệt nhau — build ghi ra cả hai để không còn
+# lệch bản giữa index.html (dùng để serve) và FINAL_REPORT.html (bản giao nộp).
+OUTS = [os.path.join(BASE, "12_report", "index.html"),
+        os.path.join(BASE, "12_report", "FINAL_REPORT.html")]
 TPL  = os.path.join(BASE, "report_template.html")
+
+# 8 khối chức năng chuẩn của chuỗi giá trị vận hành quỹ (xem 00_control/SCHEMAS.md).
+# blocks_todo được suy ra động = ALL_BLOCKS trừ các khối đã có trong task_registry.csv,
+# KHÔNG hard-code nữa — trước đây "Performance & Risk Management" bị liệt kê nhầm vào
+# cả "đã nghiên cứu" lẫn "chưa nghiên cứu" cùng lúc vì danh sách todo hard-code không
+# được cập nhật khi khối Risk được bổ sung.
+ALL_BLOCKS = [
+    "NAV & Fund Accounting",
+    "Reconciliation & Settlement",
+    "Transfer Agency & Nhà đầu tư",
+    "Performance & Risk Management",
+    "Corporate Actions",
+    "Client Reporting",
+    "Compliance & Regulatory Reporting",
+    "Data Management",
+]
 
 def read(p):
     with open(p, encoding="utf-8") as f:
@@ -23,6 +43,15 @@ try:
 except FileNotFoundError:
     sources = []
 
+# 8 tác vụ có trong 09_roles_tasks/INTERVIEW_SHORTLIST.md — cập nhật danh sách này nếu
+# shortlist đổi. Dùng để tính đúng số UC mà bộ câu hỏi phỏng vấn 45 phút thực sự phủ được,
+# thay vì tuyên bố chung chung "phần lớn use case" (bản cũ overclaim: shortlist chỉ nhắm
+# khối NAV nên chỉ verify được một phần nhỏ trong tổng số UC).
+INTERVIEW_SHORTLIST_TASKS = {
+    "T-BO-001", "T-BO-002", "T-BO-004", "T-BO-006",
+    "T-BO-007", "T-BO-008", "T-BO-018", "T-BO-030",
+}
+
 n_task = len(tasks)
 n_uc   = len(usecases)
 blocks = sorted({t["khoi_chuc_nang"] for t in tasks})
@@ -32,18 +61,24 @@ quick  = sum(1 for u in usecases if u.get("ro") == "Quick win")
 verif  = sum(1 for u in usecases if u.get("muc_do") == "VERIFIED")
 no_dur = sum(1 for t in tasks if not t.get("thoi_luong_uoc_tinh_phut", "").strip())
 no_sys = sum(1 for t in tasks if not t.get("he_thong_dung", "").strip())
+shortlist_uc = sorted({u["uc_id"] for u in usecases if u.get("task_id") in INTERVIEW_SHORTLIST_TASKS})
 today  = datetime.date.today().strftime("%d/%m/%Y")
+
+# Deep dive .md có sẵn trong 12_deep_dives/ (dùng để Phần 08 biết UC nào đã có
+# hồ sơ chi tiết và UC nào trong top điểm số hiện tại còn thiếu, thay vì âm thầm
+# bỏ qua toàn bộ thư mục này như bản build trước).
+deep_dive_files = sorted(
+    m.group(1) for f in os.listdir(DD) if f.endswith(".md")
+    for m in [re.match(r"(UC-\d+)\.md$", f)] if m
+) if os.path.isdir(DD) else []
+
+blocks_todo = [b for b in ALL_BLOCKS if b not in blocks]
 
 # ── META: sửa nội dung ở đây khi thêm khối mới ────────────────────
 META = {
-    "blocks_todo": [
-        "Corporate Actions",
-        "Client Reporting",
-        "Performance & Risk Management",
-        "Compliance & Regulatory Reporting",
-        "Data Management",
-    ],
+    "blocks_todo": blocks_todo,
     "deep_dive_n": 10,
+    "deep_dive_files": deep_dive_files,
     "findings": [
         {"t": f"{n_uc} cơ hội ứng dụng AI trên {n_task} tác vụ vận hành có thật",
          "d": f"Mỗi tác vụ được bóc tách từ văn bản pháp luật, bản cáo bạch, mô tả công việc "
@@ -72,16 +107,19 @@ META = {
         "mô tả công việc của Bản Việt và HD Capital, quy chế VSDC và thông tư Bộ Tài chính. "
         "Quy trình tương đồng vì cùng chịu Thông tư 98/2020, nhưng không được hiểu là quy trình của Dragon Capital.",
         f"<b>Đã nghiên cứu {len(blocks)}/8 khối chức năng</b> của chuỗi giá trị vận hành quỹ. "
-        "Năm khối còn lại chưa khảo sát.",
+        f"{len(blocks_todo)} khối còn lại chưa khảo sát: {', '.join(blocks_todo)}.",
         "<b>Điểm số do người phân tích chấm thủ công</b> trên từng use case, không dùng quy tắc tự động. "
         "Cơ sở chấm điểm hiển thị trong hồ sơ từng use case.",
         f"<b>Ngày chốt dữ liệu: {today}.</b> Hiệu lực văn bản pháp luật được kiểm tại thời điểm thu thập; "
         "cần kiểm lại nếu dùng sau 6 tháng.",
     ],
-    "next_step": "Một cuộc phỏng vấn 45 phút với chuyên viên vận hành quỹ sẽ lấp được cả hai cột "
-                 f"đang trống và nâng phần lớn trong {n_uc} use case từ CATALOGUE lên VERIFIED. "
+    "next_step": "Một cuộc phỏng vấn 45 phút với chuyên viên vận hành quỹ khối NAV sẽ lấp được cả hai cột "
+                 f"đang trống cho 8 tác vụ cốt lõi, đủ nâng <b>{len(shortlist_uc)}/{n_uc} use case</b> "
+                 f"({', '.join(shortlist_uc)}) từ CATALOGUE lên VERIFIED — không phải phần lớn {n_uc} UC. "
                  "Bộ câu hỏi đã soạn sẵn tại <code>09_roles_tasks/INTERVIEW_SHORTLIST.md</code> — "
-                 f"32 câu, bám vào {ask} tác vụ cụ thể đang thiếu dữ kiện.",
+                 f"32 câu, bám vào {ask} tác vụ cụ thể đang thiếu dữ kiện, nhưng shortlist hiện chỉ phủ khối "
+                 "NAV &amp; Fund Accounting. Cần thêm bộ câu hỏi tương tự cho Settlement / Transfer Agency / "
+                 "Risk để verify được phần còn lại.",
 }
 
 def load_json(name):
@@ -103,7 +141,7 @@ repl = {
                   f"Việt Nam: {n_task} tác vụ vận hành được bóc tách từ nguồn sơ cấp, "
                   f"{n_uc} cơ hội ứng dụng AI được chấm điểm và xếp thứ tự ưu tiên.",
     "{{ORG}}":    "Sunext AI Lab",
-    "{{VERSION}}": "v2.0",
+    "{{VERSION}}": "v2.2",
     "{{BYLINE}}": f"Chốt dữ liệu {today}  ·  {n_task} tác vụ  ·  {n_uc} use case  ·  "
                   f"{len(sources)} nguồn  ·  {len(blocks)}/8 khối chức năng",
     "{{DD_N}}":   str(META["deep_dive_n"]),
@@ -128,10 +166,13 @@ html = inject(html, "USECASES", usecases)
 html = inject(html, "META", META)
 html = inject(html, "SOURCES", sources)
 
-os.makedirs(os.path.dirname(OUT), exist_ok=True)
-with open(OUT, "w", encoding="utf-8") as f:
-    f.write(html)
+for out in OUTS:
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    with open(out, "w", encoding="utf-8") as f:
+        f.write(html)
 
-print(f"Đã dựng: {OUT}")
+print(f"Đã dựng: {', '.join(OUTS)}")
 print(f"  {n_task} tác vụ · {n_uc} use case · {len(blocks)} khối · {len(sources)} nguồn")
 print(f"  Quick win {quick} · pain point {pain} · cần phỏng vấn {ask}")
+print(f"  blocks_todo: {META['blocks_todo']}")
+print(f"  deep_dive_files: {deep_dive_files}")

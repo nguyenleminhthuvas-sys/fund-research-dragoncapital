@@ -69,3 +69,44 @@ Số finding: 3 HIGH / 3 MED / 0 LOW
 - [x] TASK_CANDIDATES.csv >= 300 dòng
 - [x] Mọi 4 artifact đều có ## HANDOFF block
 Kết luận: G2 PASS.
+
+## AUDIT 2026-08-17 — FINAL_REPORT.html (10 lượt kiểm tra theo yêu cầu người dùng)
+
+**Lưu ý quan trọng:** đây KHÔNG phải lượt Red Team 10-hạng-mục chuẩn của T7.1 (bịa nguồn/bịa số/nhãn sai/... như phần trên) — T7.1 áp trên bộ `usecase_registry.csv` (43 dòng) + `task_registry.csv` (87 dòng) hiện hành **vẫn chưa từng được chạy** và nên làm riêng. Lượt này là audit nội dung/kỹ thuật/pháp lý trên `12_report/FINAL_REPORT.html` (xem chi tiết 10 lượt trong lịch sử hội thoại phiên làm việc; tóm tắt findings mức Cao/Trung bình bên dưới).
+
+**Findings mức Cao đã sửa trong phiên này** (xem `CHANGELOG.md` 2026-08-17 v2.1):
+- `build_report.py`: `blocks_todo` hard-code khiến "Performance & Risk Management" hiện cùng lúc ở cả "đã nghiên cứu" và "chưa nghiên cứu" → đã sửa thành tính động.
+- Phần 08 "Phân tích sâu" không dùng `12_deep_dives/*.md` và danh sách deep-dive lệch khỏi top điểm số hiện hành (UC-028, UC-027, UC-043 không có deep-dive dù đứng đầu bảng) → đã sửa JS để link file thật khi có, cảnh báo khi thiếu; đã viết bổ sung `UC-027.md`, `UC-028.md`, `UC-043.md`.
+- 3 tác vụ lưu ký (T-BO-041/042/043) trích quyết định không có `source_id` → đã đăng ký `S-VSD-002`.
+
+**Findings mức Cao CHƯA sửa, cần quyết định của người phụ trách (không tự ý xử lý vì ngoài phạm vi kỹ thuật):**
+- `TASK_BOARD.md` ghi T5.1→T7.2 là TODO dù sản phẩm đã hoàn thành trên thực tế — đã đồng bộ lại trạng thái, xem `TASK_BOARD.md`.
+- `OPEN_QUESTIONS.md` OQ-002 (fact-check đúng 100 UC) chưa RESOLVED nhưng sản phẩm chỉ có 43 UC — vẫn để ngỏ, xem `ASSUMPTIONS.md` AS-004.
+- Tên gọi "FINAL_REPORT" trong khi nội dung tự nhận 0/43 VERIFIED — đã thêm banner "Giai đoạn: Catalogue nghiên cứu" ở đầu trang thay vì đổi tên file (tránh phá link đang trỏ tới file này).
+
+## AUDIT PHASE 3 (T7.1) — RED TEAM 10 HẠNG MỤC TRÊN DỮ LIỆU CUỐI (17/08/2026)
+
+Chạy đúng T7.1 (chưa từng làm trước đây — xem cảnh báo ở mục audit phía trên) trên `usecase_registry.csv` (43 dòng) và `task_registry.csv` (87 dòng) hiện hành, bằng script đối chiếu tự động + rà soát thủ công có mục tiêu.
+
+**Hạng mục 1 — Bịa nguồn:** PASS. 0/130 dòng có `source_ids` trỏ tới source_id không tồn tại trong `SOURCE_REGISTRY.csv`. 0 source_id bị trùng đăng ký cho 2 nguồn khác nhau.
+
+**Hạng mục 2 — Bịa số / thiếu đơn vị-kỳ:** PASS. Mọi số liệu định lượng tìm được (tỷ lệ %, số tiền phạt) đều gắn với một sự kiện xử phạt cụ thể có nguồn (MB Capital, Amber Capital) — không có số liệu "trôi nổi" thiếu kỳ/đơn vị kiểu "AUM 77.000 tỷ" mà GLOBAL_RULES.md mục 6 cấm.
+
+**Hạng mục 3 — Nhãn sai FACT/INFERENCE:** PASS. 87 tác vụ: 51 REG / 31 FACT / 5 INFERENCE (5,7%). 5 dòng INFERENCE (T-BO-026→030) đều là tác vụ suy ra từ JD quốc tế (VelvetJobs/Jobed.ai) áp cho ngữ cảnh VN — gắn nhãn đúng theo GLOBAL_RULES.md mục 4.
+
+**Hạng mục 4 — Bịa chức danh:** PASS. 100% `role_chinh` là tên vai trò chức năng chung (Kế toán Quỹ, Quản trị rủi ro, Nhân viên lưu ký...), không có tên người hay chức danh cụ thể tại Dragon Capital.
+
+**Hạng mục 5 — Use case rỗng:** PASS. 0/43 UC thiếu `van_de_kinh_doanh`/`ai_lam_gi_o_buoc_nao`/`du_lieu_can_co`. 0/87 task thiếu `mo_ta_ngan`.
+
+**Hạng mục 6 — Trùng lặp:** PASS. 0 tên use case trùng nhau, 0 task_id bị 2 UC khác nhau dùng chung (mỗi UC neo đúng 1 task).
+
+**Hạng mục 7 — Lệch phân bố:** Không phải lỗi, chỉ là quan sát: tỷ lệ task→UC khác nhau theo khối (Reconciliation & Settlement 5 UC/13 task = 38%, Transfer Agency 6/10 = 60%, NAV 16/31 = 52%, Risk 16/33 = 48%). Không có ngưỡng chuẩn nào bị vi phạm — mức độ "sinh được UC" khác nhau theo bản chất từng khối là hợp lý.
+
+**Hạng mục 8 — Trích quá 15 từ:** [FINDING, ĐÃ SỬA] 11/87 dòng `task_registry.csv` cột `chi_tiet_ref` (nội bộ, không hiện trong HTML công khai) trích nguyên văn 16–30 từ, vi phạm GLOBAL_RULES.md mục 5 ("Trích dẫn ≤ 15 từ"). Đã cắt còn ≤15 từ, giữ nguyên phần còn lại qua ghi chú trỏ về `raw_ref` thay vì tự diễn giải lại nội dung pháp lý (tránh rủi ro diễn giải sai khi paraphrase).
+
+**Hạng mục 9 — Logic gãy:** [FINDING QUAN TRỌNG NHẤT, ĐÃ GHI NHẬN] Công thức tính `tong_diem` (GLOBAL_RULES.md OS-5: giá trị×0,35 + khả thi×0,25 + dữ liệu×0,25 + rủi ro×0,15) khớp đúng 43/43 dòng — **không lỗi**. Nhưng quy tắc xếp rổ `ro` (Quick win/Chiến lược/Nghiên cứu) mô tả trong `IMPLEMENTATION_PLAN.md` T6.1 (xét riêng từng trục) **không khớp dữ liệu thực tế** — áp lại quy tắc đó cho ra 17/43 sai lệch. Dữ liệu thực tế khớp chính xác 43/43 với một quy tắc đơn giản hơn hẳn (chỉ dựa ngưỡng `tong_diem`: ≥3,8 Quick win / ≥3,0 Chiến lược / còn lại Nghiên cứu), nhất quán tuyệt đối nhưng **không được ghi chép ở đâu cả** trước audit này. Đã cập nhật `IMPLEMENTATION_PLAN.md` ghi lại đúng quy tắc thực tế — không sửa lại 43 giá trị `ro` vì chúng tự nhất quán nội bộ và quy tắc đơn giản hơn không rõ là "sai", chỉ là chưa ai ghi lại. Lộ trình 3 đợt (`roadmap.json`): 43/43 UC xuất hiện đúng 1 lần trong đúng 1 đợt (không thiếu, không trùng, không có id giả); 11 quan hệ phụ thuộc UC→UC đều tuân thủ thứ tự đợt (đợt của UC nguồn ≤ đợt của UC phụ thuộc) và không có chu trình (cycle).
+
+**Hạng mục 10 — Tỷ lệ INFERENCE:** PASS. 5/87 = 5,7%, thấp hơn nhiều so với ngưỡng 35% dùng ở lượt audit T2.x trước đó.
+
+### Kết luận T7.1
+2 finding thực chất: [AUD-007] Trích quá 15 từ (MED, đã đóng — đã sửa) và [AUD-008] Quy tắc xếp rổ không khớp tài liệu (HIGH về mặt quản trị dữ liệu, đã đóng bằng cách cập nhật tài liệu cho khớp thực tế thay vì sửa dữ liệu). Không phát hiện bịa nguồn/bịa số/bịa chức danh/use case rỗng/trùng lặp. **T7.1 → DONE** (xem `TASK_BOARD.md`).

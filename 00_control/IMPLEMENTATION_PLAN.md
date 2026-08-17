@@ -698,11 +698,22 @@ ORCHESTRATOR chạy checklist, **không đạt thì không được sang Phase 5
 
 **Công thức:** `tong_diem = Giá trị × 0,35 + Khả thi × 0,25 + Dữ liệu × 0,25 + Rủi ro × 0,15`
 
-**Xếp rổ:**
+**Xếp rổ (kế hoạch gốc — KHÔNG khớp dữ liệu thực tế, xem ghi chú dưới):**
 
 - **Quick win**: tổng ≥ 3,8 và khả thi ≥ 4 và dữ liệu ≥ 4
 - **Chiến lược**: giá trị ≥ 4 nhưng khả thi hoặc dữ liệu ≤ 3
 - **Nghiên cứu**: còn lại
+
+> **Ghi chú audit 17/08/2026:** Đối chiếu 43/43 dòng `usecase_registry.csv` cho thấy quy tắc
+> xếp rổ **thực tế đã áp dụng** đơn giản hơn quy tắc trên — chỉ dựa vào `tong_diem`, không xét
+> riêng từng trục khả thi/dữ liệu/giá trị:
+> `Quick win: tong_diem ≥ 3,8` · `Chiến lược: 3,0 ≤ tong_diem < 3,8` · `Nghiên cứu: tong_diem < 3,0`.
+> Khớp chính xác 43/43 dòng (0 sai lệch), trong khi quy tắc theo từng trục ở trên cho ra
+> 17/43 sai lệch nếu áp lại — tức bảng trên đã KHÔNG phải là quy tắc dùng để tạo dữ liệu hiện
+> hành. Không có ghi chép nào giải thích khi nào/tại sao quy tắc bị đơn giản hoá. Công thức
+> tính điểm `tong_diem` (GLOBAL_RULES.md OS-5, trọng số 0,35/0,25/0,25/0,15) thì khớp đúng
+> 43/43 dòng — không có sai lệch ở bước tính điểm, chỉ sai lệch ở bước xếp rổ sau đó.
+> Xem `00_control/AUDIT_LOG.md` mục 17/08/2026.
 
 **Output:** cập nhật `usecase_registry.csv` + `/11_scoring/PRIORITY.md`
 

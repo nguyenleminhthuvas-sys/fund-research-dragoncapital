@@ -17,11 +17,11 @@
 | T4.4 | Thư | T4.2 | IN PROGRESS | Phỏng vấn sơ cấp |
 | T4.4.1 | Agent | T4.4 | **DONE** | Khối 1: Thu thập pain point & bộ câu hỏi NAV |
 | T4.4.2 | Agent | T4.4 | **DONE** | Khối 2: Thu thập pain point & bộ câu hỏi Settlement |
-| T5.1 | A10 | T4.3 | TODO | Sinh use case theo ma trận task × năng lực AI |
-| T5.2 | A10 | T5.1 | TODO | Dedup & chống loãng |
-| T5.3 | A11 | T5.2 | TODO (chờ OQ-002) | Lọc 100 UC xuất sắc từ pool — cần Thư xác nhận bổ sung task này |
-| T5.4 | A10 | T5.3 | TODO (chờ OQ-002) | QuoteExtractor: fact-check 2 nguồn cho đúng 100 UC đã lọc |
-| T6.1 | A11 | T5.4 | TODO | Chấm điểm 4 trục |
-| T6.2 | A11 | T6.1 | TODO | Top 30 & lộ trình |
-| T7.1 | A12 | T2.x | TODO | Red Team audit (chạy song song) |
-| T7.2 | A13 | T6.2, T7.1 | TODO | Báo cáo tổng hợp |
+| T5.1 | A10 | T4.3 | **DONE** | Sinh use case theo ma trận task × năng lực AI — 43 UC trong `usecase_registry.csv`. *(Trạng thái đồng bộ lại 17/08/2026 — artifact đã tồn tại từ trước nhưng board chưa cập nhật.)* |
+| T5.2 | A10 | T5.1 | **DONE** | Dedup & chống loãng — 43 UC không trùng lặp id/tên. |
+| T5.3 | A11 | T5.2 | **DONE, PHẠM VI THU HẸP** | Lọc UC từ pool — **chỉ 43/100 UC theo mục tiêu gốc**, KHÔNG đạt target OQ-002. Chưa có ghi chép chính thức về quyết định thu hẹp — xem `00_control/OPEN_QUESTIONS.md` OQ-002 (vẫn HIGH/OPEN) và `00_control/ASSUMPTIONS.md` AS-004. |
+| T5.4 | A10 | T5.3 | **DONE, MỘT PHẦN** | Fact-check nguồn cho 43 UC đã lọc — mỗi UC có `source_ids`, nhưng 0/43 đạt mức VERIFIED (tất cả CATALOGUE) vì thiếu thời lượng thao tác + hệ thống dùng, xem `META.limits` trong `FINAL_REPORT.html`. |
+| T6.1 | A11 | T5.4 | **DONE** | Chấm điểm 4 trục (giá trị/khả thi/dữ liệu/rủi ro) — có trong `usecase_registry.csv` cột `diem_*`/`tong_diem`, chấm thủ công không dùng quy tắc tự động. |
+| T6.2 | A11 | T6.1 | **DONE** | Top use case & lộ trình 3 đợt — `_data/roadmap.json`, hiển thị Phần 06 báo cáo. |
+| T7.1 | A12 | T2.x | **DONE (17/08/2026)** | Red Team 10-hạng-mục đã chạy trên dữ liệu cuối (43 UC/87 task). 2 finding thực chất — trích quá 15 từ (đã sửa 11 dòng) và quy tắc xếp rổ `ro` không khớp tài liệu kế hoạch gốc (đã cập nhật tài liệu cho khớp thực tế). Không phát hiện bịa nguồn/bịa số/bịa chức danh. Chi tiết: `00_control/AUDIT_LOG.md` mục "AUDIT PHASE 3". |
+| T7.2 | A13 | T6.2, T7.1 | **DONE, VỚI GHI CHÚ** | Báo cáo tổng hợp — `12_report/FINAL_REPORT.html` / `index.html` (bản v2.1, 17/08/2026). Đã audit + sửa lỗi kỹ thuật (xem CHANGELOG 17/08/2026) nhưng T7.1 chưa đóng và OQ-002 chưa RESOLVED — báo cáo tự nhận là giai đoạn "Catalogue", chưa phải bản triển khai chi tiết (xem banner đầu trang). |

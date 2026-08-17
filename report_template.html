@@ -90,6 +90,11 @@ select:focus,input:focus{outline:2px solid var(--brass);outline-offset:1px}
 .tally{font:11px var(--mono);color:var(--ink-3);margin-left:auto}
 
 /* ── BẢNG ────────────────────────────────────────── */
+/* Bọc mọi bảng trong .tbl-wrap để bảng tự cuộn ngang trong khung của nó thay vì
+   bóp chữ hoặc làm vỡ layout toàn trang trên màn hình hẹp. */
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--rule)}
+.tbl-wrap table{border:none}
+@media (max-width:900px){.tbl-wrap table{min-width:640px}}
 table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--rule);font-size:14px}
 thead th{text-align:left;font:600 10.5px var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);
   padding:11px 12px;border-bottom:1px solid var(--ink);white-space:nowrap;background:var(--panel)}
@@ -221,10 +226,25 @@ tr.dossier td{padding:0;background:#F9FAFB}
 footer{border-top:2px solid var(--ink);padding:22px 0 46px;font:11px var(--mono);color:var(--ink-3);
   display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 
+/* ── VỀ ĐẦU TRANG ────────────────────────────────── */
+#toTop{position:fixed;right:22px;bottom:22px;width:44px;height:44px;border-radius:50%;
+  background:var(--ink);color:#fff;border:none;font-size:19px;line-height:1;cursor:pointer;
+  box-shadow:0 3px 14px rgba(15,30,46,.28);display:none;align-items:center;justify-content:center;z-index:80}
+#toTop:hover{background:var(--brass)}
+
+/* ── SƠ ĐỒ PHỤ THUỘC (Phần 06) ───────────────────── */
+.depgraph{overflow-x:auto;margin-bottom:14px}
+.depgraph svg{display:block}
+.dep-node rect{transition:filter .15s}
+.dep-node:hover rect{filter:brightness(1.06)}
+.deplegend{display:flex;gap:18px;flex-wrap:wrap;font:11px var(--sans);color:var(--ink-3);margin:0 0 18px}
+.deplegend span{display:inline-flex;align-items:center;gap:6px}
+.deplegend i{width:11px;height:11px;border-radius:2px;display:inline-block}
+
 @media print{
   nav.rail{display:none} .body{grid-template-columns:1fr}
   .dd .ddbody{display:block!important} tr.dossier{display:none}
-  body{background:#fff}
+  body{background:#fff} #toTop{display:none!important}
 }
 @media (max-width:900px){
   .body{grid-template-columns:1fr;gap:0} nav.rail{display:none}
@@ -241,6 +261,9 @@ footer{border-top:2px solid var(--ink);padding:22px 0 46px;font:11px var(--mono)
     <div class="imprint">
       <span class="mark">{{ORG}}</span>
       <span>Nghiên cứu vận hành quỹ · Bản {{VERSION}}</span>
+    </div>
+    <div style="margin-top:16px;padding:10px 14px;background:#FBF2E9;border:1px solid var(--brass);border-radius:4px;font:600 12.5px var(--sans);color:var(--ink)">
+      ⚠ Giai đoạn: <b>Catalogue nghiên cứu</b> — 0 use case đã qua phỏng vấn xác minh (mức VERIFIED). Đây là bản đồ cơ hội để định hướng, chưa phải kế hoạch triển khai chi tiết. Đọc Phần 09 trước khi trích dẫn bất kỳ số liệu nào.
     </div>
     <h1>{{TITLE}}</h1>
     <p class="dek">{{DEK}}</p>
@@ -292,12 +315,15 @@ footer{border-top:2px solid var(--ink);padding:22px 0 46px;font:11px var(--mono)
         <div class="controls">
           <select id="tBlk"></select>
           <select id="tTag"><option value="">Mọi nhãn</option><option value="REG">REG — quy định</option><option value="FACT">FACT — xác minh được</option><option value="INFERENCE">INFERENCE — suy luận</option></select>
+          <label style="display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-2);cursor:pointer">
+            <input type="checkbox" id="tInt"> Chỉ hiện tác vụ cần phỏng vấn
+          </label>
           <input type="search" id="tQ" placeholder="Tìm trong tác vụ…">
           <span class="tally" id="tTally"></span>
         </div>
-        <table><thead><tr>
+        <div class="tbl-wrap"><table><thead><tr>
           <th style="width:92px">Mã</th><th>Tác vụ</th><th style="width:96px">Nhãn</th><th style="width:34%">Điểm gãy đã xác minh</th>
-        </tr></thead><tbody id="tBody"></tbody></table>
+        </tr></thead><tbody id="tBody"></tbody></table></div>
       </section>
 
       <section id="s4">
@@ -311,9 +337,9 @@ footer{border-top:2px solid var(--ink);padding:22px 0 46px;font:11px var(--mono)
           <input type="search" id="uQ" placeholder="Tìm trong use case…">
           <span class="tally" id="uTally"></span>
         </div>
-        <table><thead><tr>
+        <div class="tbl-wrap"><table><thead><tr>
           <th style="width:78px">Mã</th><th>Use case</th><th style="width:120px">Nhóm</th><th style="width:74px;text-align:right">Điểm</th>
-        </tr></thead><tbody id="uBody"></tbody></table>
+        </tr></thead><tbody id="uBody"></tbody></table></div>
       </section>
 
       <section id="s4b">
@@ -387,6 +413,8 @@ footer{border-top:2px solid var(--ink);padding:22px 0 46px;font:11px var(--mono)
   </footer>
 </div>
 
+<button id="toTop" title="Về đầu trang">↑</button>
+
 <script>
 /* Bọc trong IIFE: mọi const/let thành phạm vi hàm, không còn xung đột với
    biến toàn cục của trình duyệt (top, self, name, status, location...).
@@ -409,6 +437,42 @@ const ROCLS = {'Quick win':'c-quick','Chiến lược':'c-strat','Nghiên cứu'
 const ROCOL = {'Quick win':'var(--quick)','Chiến lược':'var(--strat)','Nghiên cứu':'var(--resea)'};
 const esc = s => (s==null?'':String(s)).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const num = n => Number(n||0);
+const UC_MAP = {}; USECASES.forEach(u=>{ if(u.uc_id) UC_MAP[u.uc_id.trim()]=u; });
+
+/* Dịch nghĩa tiếng Việt cho tên 8 khối chức năng (4 đã khảo sát + 4 chưa khảo sát) —
+   tên gốc trong CSV đang lẫn Anh/Việt, thêm dịch nghĩa kế bên cho dễ hiểu trên toàn trang. */
+const BLOCK_VI = {
+  'NAV & Fund Accounting': 'Định giá NAV & Kế toán Quỹ',
+  'Reconciliation & Settlement': 'Đối soát & Thanh toán bù trừ',
+  'Transfer Agency & Nhà đầu tư': 'Đại lý chuyển nhượng & Nhà đầu tư',
+  'Performance & Risk Management': 'Hiệu quả đầu tư & Quản trị rủi ro',
+  'Corporate Actions': 'Sự kiện doanh nghiệp / quyền lợi chứng khoán',
+  'Client Reporting': 'Báo cáo khách hàng',
+  'Compliance & Regulatory Reporting': 'Tuân thủ & Báo cáo cơ quan quản lý',
+  'Data Management': 'Quản trị dữ liệu',
+};
+/* Dùng cho <option> / title thuần (không chèn HTML được) */
+const blockPlain = b => BLOCK_VI[b] ? `${b} — ${BLOCK_VI[b]}` : (b||'');
+/* Dùng khi render HTML: tên gốc + dịch nghĩa mờ hơn, không bị ép hoa theo khối cha */
+const blockHtml = b => BLOCK_VI[b]
+  ? `${esc(b)}<span style="font-family:var(--sans);font-weight:400;text-transform:none;letter-spacing:0;opacity:.68"> — ${esc(BLOCK_VI[b])}</span>`
+  : esc(b);
+
+/* Đồng bộ #UC-xxx vào URL mỗi khi trạng thái hồ sơ đang mở đổi, để copy được link
+   trực tiếp tới 1 use case. Dùng replaceState để không làm rối lịch sử back/forward. */
+function syncUCHash(){
+  const url = openUC ? '#'+openUC : (location.pathname+location.search);
+  history.replaceState(null,'',url);
+}
+/* Mở 1 use case từ nơi khác trang (ma trận, lộ trình, sơ đồ phụ thuộc, hoặc link chia sẻ):
+   xoá bộ lọc đang áp, mở đúng dòng, cuộn tới đúng chỗ, và cập nhật link chia sẻ. */
+function openUCAt(id){
+  if(!UC_MAP[id]) return;
+  uBlk.value=''; uRo.value=''; uCap.value=''; uQ.value='';
+  openUC=id; drawUC(); syncUCHash();
+  document.getElementById('s4').scrollIntoView();
+  requestAnimationFrame(()=>{ const row=uBody.querySelector('tr.item.open'); if(row) row.scrollIntoView({block:'center'}); });
+}
 
 /* Render source badges with full name + optional URL */
 function srcBadges(ids_raw){
@@ -431,7 +495,7 @@ document.getElementById('figures').innerHTML = BLOCKS.map(b=>{
   const t=TASKS.filter(x=>x.khoi_chuc_nang===b).length;
   const u=USECASES.filter(x=>x.khoi_chuc_nang===b);
   const q=u.filter(x=>x.ro==='Quick win').length;
-  return `<div class="fig"><div class="fig-name">${esc(b)}</div><div class="fig-row">
+  return `<div class="fig"><div class="fig-name">${blockHtml(b)}</div><div class="fig-row">
     <div><div class="fig-n">${t}</div><div class="fig-l">tác vụ</div></div>
     <div><div class="fig-n">${u.length}</div><div class="fig-l">use case</div></div>
     <div><div class="fig-n">${q}</div><div class="fig-l">quick win</div></div></div></div>`;
@@ -473,15 +537,16 @@ document.getElementById('findings').innerHTML = (META.findings||[]).map((f,i)=>
 const done=BLOCKS, todo=META.blocks_todo||[];
 document.getElementById('cover').innerHTML =
  `<div class="cover-col"><h4>Đã nghiên cứu — ${done.length} khối</h4>
-   ${done.map(b=>`<div class="cover-item done"><span>${esc(b)}</span>
+   ${done.map(b=>`<div class="cover-item done"><span>${blockHtml(b)}</span>
      <span class="n">${TASKS.filter(x=>x.khoi_chuc_nang===b).length} tác vụ</span></div>`).join('')}
    <div class="bar"><i style="width:${done.length/(done.length+todo.length)*100}%"></i></div></div>
   <div class="cover-col"><h4>Chưa nghiên cứu — ${todo.length} khối</h4>
-   ${todo.map(b=>`<div class="cover-item todo"><span>${esc(b)}</span><span class="n">—</span></div>`).join('')}</div>`;
+   ${todo.map(b=>`<div class="cover-item todo"><span>${blockHtml(b)}</span><span class="n">—</span></div>`).join('')}</div>`;
 
 /* ── bộ lọc ── */
+/* value= giữ nguyên tên gốc để lọc đúng dữ liệu; chữ hiển thị mới thêm dịch nghĩa. */
 function fillSel(id,label,vals){const s=document.getElementById(id);
-  s.innerHTML=`<option value="">${label}</option>`+vals.map(v=>`<option>${esc(v)}</option>`).join('');}
+  s.innerHTML=`<option value="">${label}</option>`+vals.map(v=>`<option value="${esc(v)}">${esc(blockPlain(v))}</option>`).join('');}
 fillSel('tBlk','Mọi khối chức năng',[...new Set(TASKS.map(t=>t.khoi_chuc_nang))]);
 fillSel('uBlk','Mọi khối chức năng',BLOCKS);
 fillSel('uCap','Mọi năng lực AI',[...new Set(USECASES.map(u=>u.nang_luc_ai))].sort());
@@ -490,15 +555,16 @@ const tagCls = v => v==='REG'?'reg':v==='FACT'?'fact':'infer';
 
 /* ── bảng tác vụ ── */
 function drawTasks(){
-  const b=tBlk.value,g=tTag.value,q=tQ.value.trim().toLowerCase();
+  const b=tBlk.value,g=tTag.value,q=tQ.value.trim().toLowerCase(),onlyInt=tInt.checked;
   const rows=TASKS.filter(t=>(!b||t.khoi_chuc_nang===b)&&(!g||t['do_tin_cay(FACT/INFERENCE)']===g)
+    &&(!onlyInt||(t.can_phong_van||'').trim().toUpperCase()==='Y')
     &&(!q||[t.task_id,t.tac_vu_cap3,t.mo_ta_ngan,t.diem_gay_pain_point].join(' ').toLowerCase().includes(q)));
   tTally.textContent=`${rows.length} / ${TASKS.length} tác vụ`;
   let html='',cur=null;
   const order=[...new Set(TASKS.map(t=>t.khoi_chuc_nang))];
   order.forEach(blk=>{
     const g2=rows.filter(r=>r.khoi_chuc_nang===blk); if(!g2.length) return;
-    html+=`<tr class="grp"><td colspan="4">${esc(blk)}<span class="c">${g2.length} tác vụ</span></td></tr>`;
+    html+=`<tr class="grp"><td colspan="4">${blockHtml(blk)}<span class="c">${g2.length} tác vụ</span></td></tr>`;
     g2.forEach(t=>{
       const pp=t.diem_gay_pain_point;
       html+=`<tr><td class="uid">${esc(t.task_id)}</td>
@@ -510,10 +576,17 @@ function drawTasks(){
   });
   tBody.innerHTML=html||`<tr><td colspan="4" style="padding:34px;text-align:center;color:var(--ink-3)">Không có tác vụ nào khớp bộ lọc.</td></tr>`;
 }
-['tBlk','tTag','tQ'].forEach(id=>document.getElementById(id).addEventListener('input',drawTasks));
+['tBlk','tTag','tQ','tInt'].forEach(id=>document.getElementById(id).addEventListener('input',drawTasks));
 
 /* ── bảng use case ── */
 let openUC=null;
+/* Link chia sẻ trực tiếp tới 1 use case: copy URL kèm #UC-xxx vào clipboard. */
+window.copyUCLink = function(id, btn){
+  const url = location.origin + location.pathname + '#' + id;
+  const done = ok => { if(!btn) return; const old=btn.textContent; btn.textContent = ok?'✓ Đã copy link':'Không copy được — tự chọn link trên thanh địa chỉ'; setTimeout(()=>btn.textContent=old, 2200); };
+  if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(()=>done(true)).catch(()=>done(false));
+  else done(false);
+};
 function dossier(u){
   const sc=[['Giá trị',u.diem_gia_tri],['Khả thi',u.diem_kha_thi],['Dữ liệu',u.diem_du_lieu],['Rủi ro',u.diem_rui_ro]];
   const fld=(l,v)=>`<div class="blk"><div class="blk-l">${l}</div><div class="blk-v ${v?'':'none'}">${v?esc(v):'chưa có thông tin'}</div></div>`;
@@ -522,7 +595,9 @@ function dossier(u){
     <div class="dsr-top">
       <div>
         <h3>${esc(u.ten_use_case)}</h3>
-        <div class="meta">${esc(u.uc_id)} · ${esc(u.nang_luc_ai)} · ${esc(u.ai_type)} · ${esc(u.khoi_chuc_nang)}</div>
+        <div class="meta">${esc(u.uc_id)} · ${esc(u.nang_luc_ai)} · ${esc(u.ai_type)} · ${blockHtml(u.khoi_chuc_nang)}
+          <button onclick="event.stopPropagation();copyUCLink('${esc(u.uc_id)}',this)" style="margin-left:10px;border:1px solid var(--rule);background:var(--panel);color:var(--ink-2);font:600 10.5px var(--sans);padding:3px 9px;border-radius:20px;cursor:pointer">🔗 Copy link</button>
+        </div>
         ${fld('Vấn đề nghiệp vụ',u.van_de_kinh_doanh)}
         ${fld('Quy trình hiện tại',u.quy_trinh_hien_tai_theo_buoc)}
         ${fld('AI can thiệp ở đâu',u.ai_lam_gi_o_buoc_nao)}
@@ -561,7 +636,7 @@ function drawUC(){
   BLOCKS.forEach(blk=>{
     const g=rows.filter(x=>x.khoi_chuc_nang===blk).sort((a,b2)=>num(b2.tong_diem)-num(a.tong_diem));
     if(!g.length) return;
-    html+=`<tr class="grp"><td colspan="4">${esc(blk)}<span class="c">${g.length} use case</span></td></tr>`;
+    html+=`<tr class="grp"><td colspan="4">${blockHtml(blk)}<span class="c">${g.length} use case</span></td></tr>`;
     g.forEach(u=>{
       const on=openUC===u.uc_id;
       html+=`<tr class="item ${on?'open':''}" data-id="${esc(u.uc_id)}">
@@ -573,7 +648,7 @@ function drawUC(){
     });
   });
   uBody.innerHTML=html||`<tr><td colspan="4" style="padding:34px;text-align:center;color:var(--ink-3)">Không có use case nào khớp bộ lọc.</td></tr>`;
-  uBody.querySelectorAll('tr.item').forEach(tr=>tr.onclick=()=>{openUC=openUC===tr.dataset.id?null:tr.dataset.id;drawUC();});
+  uBody.querySelectorAll('tr.item').forEach(tr=>tr.onclick=()=>{openUC=openUC===tr.dataset.id?null:tr.dataset.id;drawUC();syncUCHash();});
 }
 ['uBlk','uRo','uCap','uQ'].forEach(id=>document.getElementById(id).addEventListener('input',()=>{openUC=null;drawUC();}));
 
@@ -650,17 +725,84 @@ function marker(shape,x,y,fill){
   g+=`<text x="${(P.l+W-P.r)/2}" y="${H-14}" text-anchor="middle" font-size="11.5" fill="var(--ink-2)" letter-spacing=".9">KHẢ THI KỸ THUẬT →</text>`;
   g+=`<text transform="translate(19,${(P.t+H-P.b)/2}) rotate(-90)" text-anchor="middle" font-size="11.5" fill="var(--ink-2)" letter-spacing=".9">GIÁ TRỊ NGHIỆP VỤ →</text>`;
   mx.innerHTML=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto" xmlns="http://www.w3.org/2000/svg">${g}</svg>`;
-  mx.querySelectorAll('g.uc-point').forEach(g => {
-    g.onclick = () => {
-      uBlk.value=''; uRo.value=''; uCap.value=''; uQ.value='';
-      openUC=g.dataset.uc; drawUC();
-      document.getElementById('s4').scrollIntoView();
-    };
-  });
+  mx.querySelectorAll('g.uc-point').forEach(g => { g.onclick = () => openUCAt(g.dataset.uc); });
   mxLeg.innerHTML =
-    BLOCKS.map(b=>`<span><svg width="15" height="15">${marker(SHAPE[b],7.5,7.5,'var(--ink-2)')}</svg>${esc(b)}</span>`).join('')
+    BLOCKS.map(b=>`<span><svg width="15" height="15">${marker(SHAPE[b],7.5,7.5,'var(--ink-2)')}</svg>${blockHtml(b)}</span>`).join('')
     + Object.keys(ROCOL).map(r=>`<span><svg width="15" height="15"><circle cx="7.5" cy="7.5" r="5.4" fill="${ROCOL[r]}"/></svg>${r}</span>`).join('');
 })();
+
+/* ── sơ đồ phụ thuộc (thay danh sách chữ bằng đồ thị mũi tên) ── */
+function renderDepGraph(deps){
+  if(!deps || !deps.length) return '';
+  const nodes=new Set(), out={}, inn={}, undirected={};
+  deps.forEach(d=>{
+    nodes.add(d.tu); nodes.add(d.den);
+    (out[d.tu]=out[d.tu]||[]).push(d.den);
+    (inn[d.den]=inn[d.den]||[]).push(d.tu);
+    (undirected[d.tu]=undirected[d.tu]||new Set()).add(d.den);
+    (undirected[d.den]=undirected[d.den]||new Set()).add(d.tu);
+  });
+  // Rã thành các cụm liên thông riêng biệt để vẽ từng cụm một, dễ đọc hơn 1 đồ thị rối.
+  const seen=new Set(), comps=[];
+  nodes.forEach(n=>{
+    if(seen.has(n)) return;
+    const stack=[n], comp=[];
+    while(stack.length){ const x=stack.pop(); if(seen.has(x)) continue; seen.add(x); comp.push(x);
+      (undirected[x]||new Set()).forEach(y=>{ if(!seen.has(y)) stack.push(y); }); }
+    comps.push(comp);
+  });
+  // Xếp hạng theo đường đi dài nhất từ gốc — đồ thị vốn không có chu trình (đã xác minh khi audit).
+  const rankMemo={};
+  function rankOf(n){
+    if(rankMemo[n]!==undefined) return rankMemo[n];
+    rankMemo[n]=0; // chặn đệ quy vòng nếu dữ liệu tương lai lỡ có chu trình
+    const preds=inn[n]||[];
+    rankMemo[n] = preds.length ? 1+Math.max(...preds.map(rankOf)) : 0;
+    return rankMemo[n];
+  }
+  nodes.forEach(rankOf);
+
+  const NODE_W=126, NODE_H=42, COL_GAP=58, ROW_GAP=14, PAD=18;
+  const blocks=[];
+  comps.forEach(comp=>{
+    const byRank={};
+    comp.forEach(n=>{ (byRank[rankMemo[n]]=byRank[rankMemo[n]]||[]).push(n); });
+    const ranks=Object.keys(byRank).map(Number).sort((a,b)=>a-b);
+    const maxRows=Math.max(...ranks.map(r=>byRank[r].length));
+    const W=PAD*2+ranks.length*NODE_W+(ranks.length-1)*COL_GAP;
+    const H=PAD*2+maxRows*NODE_H+Math.max(0,maxRows-1)*ROW_GAP;
+    const pos={};
+    ranks.forEach((r,ri)=>{
+      const list=byRank[r], colX=PAD+ri*(NODE_W+COL_GAP);
+      const totalH=list.length*NODE_H+(list.length-1)*ROW_GAP, startY=(H-totalH)/2;
+      list.forEach((n,ni)=>{ pos[n]={x:colX,y:startY+ni*(NODE_H+ROW_GAP)}; });
+    });
+    let edges='';
+    deps.filter(d=>comp.includes(d.tu)).forEach(d=>{
+      const a=pos[d.tu], b=pos[d.den]; if(!a||!b) return;
+      const x1=a.x+NODE_W,y1=a.y+NODE_H/2,x2=b.x,y2=b.y+NODE_H/2,mx2=(x1+x2)/2;
+      edges+=`<path d="M${x1},${y1} C${mx2},${y1} ${mx2},${y2} ${x2},${y2}" fill="none" stroke="var(--ink-3)" stroke-width="1.4" marker-end="url(#depArrow)"><title>${esc(d.tu)} → ${esc(d.den)} — ${esc(d.ly_do)}</title></path>`;
+    });
+    let boxes='';
+    comp.forEach(n=>{
+      const p=pos[n], u=UC_MAP[n]||{}, hub=(out[n]||[]).length>1, name=(u.ten_use_case||'').slice(0,24);
+      boxes+=`<g class="dep-node" style="cursor:pointer" data-uc="${esc(n)}">
+        <rect x="${p.x}" y="${p.y}" width="${NODE_W}" height="${NODE_H}" rx="5"
+          fill="${hub?'var(--brass)':'var(--panel)'}" stroke="${hub?'var(--brass)':'var(--rule)'}"/>
+        <text x="${p.x+NODE_W/2}" y="${p.y+17}" text-anchor="middle" font-size="11" font-family="var(--mono)" font-weight="700" fill="${hub?'#fff':'var(--ink)'}">${esc(n)}</text>
+        <text x="${p.x+NODE_W/2}" y="${p.y+30}" text-anchor="middle" font-size="8.3" font-family="var(--sans)" fill="${hub?'#fff':'var(--ink-3)'}">${esc(name)}${(u.ten_use_case||'').length>24?'…':''}</text>
+        <title>${esc(n)} — ${esc(u.ten_use_case||'')}${hub?` (nuôi ${(out[n]||[]).length} use case khác)`:''}</title>
+      </g>`;
+    });
+    blocks.push(`<div class="depgraph"><svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:${W}px;height:auto" xmlns="http://www.w3.org/2000/svg">
+      <defs><marker id="depArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="var(--ink-3)"/></marker></defs>
+      ${edges}${boxes}</svg></div>`);
+  });
+  return `<div class="deplegend"><span><i style="background:var(--brass)"></i>Use case "hub" — kết quả của nó nuôi từ 2 use case khác trở lên</span>
+    <span><i style="background:var(--panel);border:1px solid var(--rule)"></i>Use case phụ thuộc</span>
+    <span>Di chuột vào mũi tên để xem lý do phụ thuộc · Bấm vào ô để mở hồ sơ use case</span></div>`
+    + blocks.join('');
+}
 
 /* ── lộ trình ── */
 (function(){
@@ -678,15 +820,16 @@ function marker(shape,x,y,fill){
   </div>`).join('');
   deps.innerHTML = D.length
     ? `<div class="hd">Chuỗi phụ thuộc — ${D.length} cặp có căn cứ trong dữ liệu</div>`
+      + renderDepGraph(D)
+      + `<details style="margin-top:6px"><summary style="cursor:pointer;font:600 11px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);padding:6px 0">Xem lý do từng cặp phụ thuộc dạng văn bản</summary>`
       + D.map(d=>`<div class="dep"><span class="pair">${esc(d.tu)}</span>
           <span class="arw">→</span><span class="pair">${esc(d.den)}</span>
           <span class="why">${esc(d.ly_do)}</span></div>`).join('')
+      + `</details>`
     : '';
-  // bấm mã UC ở lộ trình → mở hồ sơ ở phần 04
-  waves.querySelectorAll('a[data-uc]').forEach(a=>a.onclick=()=>{
-    uBlk.value='';uRo.value='';uCap.value='';uQ.value='';
-    openUC=a.dataset.uc; drawUC();
-  });
+  // bấm mã UC ở lộ trình hoặc ở sơ đồ phụ thuộc → mở hồ sơ ở phần 04
+  waves.querySelectorAll('a[data-uc]').forEach(a=>a.onclick=(e)=>{ e.preventDefault(); openUCAt(a.dataset.uc); });
+  deps.querySelectorAll('.dep-node').forEach(g=>{ g.onclick=()=>openUCAt(g.dataset.uc); });
 })();
 
 /* ── năng lực nền ── */
@@ -713,15 +856,21 @@ function marker(shape,x,y,fill){
 
 /* ── phân tích sâu ── */
 const topUC = [...USECASES].sort((a,b)=>num(b.tong_diem)-num(a.tong_diem)).slice(0,META.deep_dive_n||10);
+const DD_FILES = new Set(META.deep_dive_files||[]);
 dds.innerHTML = topUC.map((u,i)=>{
   const fld=(l,v)=>`<div class="blk"><div class="blk-l">${l}</div><div class="blk-v ${v?'':'none'}">${v?esc(v):'chưa có thông tin'}</div></div>`;
+  const hasDD = DD_FILES.has((u.uc_id||'').trim());
+  const ddLink = hasDD
+    ? `<a href="../12_deep_dives/${esc(u.uc_id)}.md" target="_blank" style="color:var(--quick);text-decoration:none;font:600 11px var(--sans);text-transform:uppercase">📄 Xem hồ sơ deep-dive đầy đủ →</a>`
+    : `<span style="color:var(--gap);font:600 11px var(--sans);text-transform:uppercase">⚠ Chưa có hồ sơ deep-dive — thuộc top ${META.deep_dive_n||10} điểm cao nhất, ưu tiên bổ sung</span>`;
   return `<details class="dd"><summary><span class="rank">${String(i+1).padStart(2,'0')}</span>
     <span style="flex:1"><b>${esc(u.ten_use_case)}</b>
-    <span style="color:var(--ink-3);font:11px var(--mono);margin-left:9px">${esc(u.uc_id)} · ${esc(u.khoi_chuc_nang)}</span></span>
+    <span style="color:var(--ink-3);font:11px var(--mono);margin-left:9px">${esc(u.uc_id)} · ${blockHtml(u.khoi_chuc_nang)}</span></span>
     <span class="chip ${ROCLS[u.ro]||''}">${esc(u.ro)}</span>
     <span style="font:400 17px var(--serif);color:var(--brass);min-width:38px;text-align:right">${esc(u.tong_diem)}</span></summary>
     <div class="ddbody">
-      ${fld('Bối cảnh nghiệp vụ',u.bối_cảnh||u.van_de_kinh_doanh)}
+      <div style="margin-bottom:14px">${ddLink}</div>
+      ${fld('Bối cảnh nghiệp vụ',u.van_de_kinh_doanh)}
       ${fld('Quy trình hiện tại theo bước',u.quy_trinh_hien_tai_theo_buoc)}
       ${fld('Thiết kế can thiệp',u.ai_lam_gi_o_buoc_nao)}
       ${fld('Dữ liệu cần có',u.du_lieu_can_co)}
@@ -736,6 +885,15 @@ dds.innerHTML = topUC.map((u,i)=>{
     </div></details>`;
 }).join('');
 
+/* Danh sách deep-dive .md đã lỗi thời (không còn nằm trong top điểm số hiện tại) —
+   hiển thị để tránh nhầm là đồng bộ với bảng trên. */
+const staleDD = [...DD_FILES].filter(id => !topUC.some(u => (u.uc_id||'').trim() === id)).sort();
+if(staleDD.length){
+  dds.innerHTML += `<p style="margin-top:18px;font-size:12.5px;color:var(--ink-3)">
+    Hồ sơ deep-dive đã có sẵn nhưng không còn nằm trong top ${META.deep_dive_n||10} điểm số hiện tại
+    (giữ lại tham khảo, không phản ánh thứ tự ưu tiên hiện hành): ${staleDD.join(', ')}.</p>`;
+}
+
 /* ── giới hạn ── */
 limitList.innerHTML=(META.limits||[]).map(l=>`<li>${l}</li>`).join('');
 nextStep.innerHTML=META.next_step||'';
@@ -746,7 +904,7 @@ nextStep.innerHTML=META.next_step||'';
   if(!el) return;
   if(!SOURCES.length){ el.innerHTML='<p style="color:var(--ink-3);font-size:13px">Không có dữ liệu nguồn.</p>'; return; }
   const TIER={'T1':'Sơ cấp','T2':'Thứ cấp','T3':'Tham khảo'};
-  el.innerHTML=`<table><thead><tr>
+  el.innerHTML=`<div class="tbl-wrap"><table><thead><tr>
     <th style="width:100px">Mã</th>
     <th style="width:60px">Cấp</th>
     <th>Tên tài liệu</th>
@@ -757,29 +915,43 @@ nextStep.innerHTML=META.next_step||'';
   +SOURCES.map(s=>{
     const url=(s.url||'').trim();
     const name=s.ten_tai_lieu||s.title||s.source_id||'';
-    const nameCell=url?`<a href="${esc(url)}" target="_blank" rel="noopener" style="color:var(--ink);text-decoration:underline;text-decoration-color:var(--rule)">${esc(name)}</a>`:esc(name);
+    const broken=/KHÔNG DÙNG ĐƯỢC/.test(s.trang_thai||s.status||'');
+    const nameStyle=broken
+      ? 'color:var(--ink-3);text-decoration:line-through;text-decoration-color:var(--rule)'
+      : 'color:var(--ink);text-decoration:underline;text-decoration-color:var(--rule)';
+    const nameCell=url?`<a href="${esc(url)}" target="_blank" rel="noopener" style="${nameStyle}">${esc(name)}</a>`:esc(name);
     const tier=s.tier||s.loai||'';
     const status=s.trang_thai||s.status||'';
-    return `<tr>
+    return `<tr${broken?' style="opacity:.6"':''}>
       <td class="uid" style="font-size:11px">${esc(s.source_id)}</td>
       <td style="font-size:11.5px;color:var(--ink-3)">${esc(TIER[tier]||tier)}</td>
-      <td>${nameCell}<div class="sub" style="font-size:12px;margin-top:3px">${esc(s.mo_ta||s.note_chat_luong||'')}</div></td>
+      <td>${nameCell}<div class="sub" style="font-size:12px;margin-top:3px">${esc(s.mo_ta||s.note_chat_luong||'')}</div>
+        ${broken?'<div style="font-size:11px;color:var(--gap);margin-top:3px">Không đóng góp nội dung nào vào báo cáo — chỉ giữ lại để truy vết đã thử.</div>':''}</td>
       <td style="font-size:13px;color:var(--ink-2)">${esc(s.to_chuc||s.publisher||'')}</td>
       <td style="font:11.5px var(--mono);color:var(--ink-3)">${esc(s.ngay_lay||s.date_fetched||'')}</td>
       <td><span style="font:600 9.5px var(--sans);letter-spacing:.06em;color:${status==='ĐANG DÙNG'?'var(--quick)':'var(--ink-3)'}">${esc(status)}</span></td>
     </tr>`;
   }).join('')
-  +'</tbody></table>';
+  +'</tbody></table></div>';
 })();
 
 /* ── điều hướng ── */
 const secs=[...document.querySelectorAll('section')],links=[...document.querySelectorAll('nav.rail a')];
+const toTopBtn=document.getElementById('toTop');
 addEventListener('scroll',()=>{
   let cur=0; secs.forEach((s,i)=>{if(s.getBoundingClientRect().top<=120)cur=i;});
   links.forEach((a,i)=>a.classList.toggle('on',i===cur));
+  if(toTopBtn) toTopBtn.style.display = scrollY>560 ? 'flex' : 'none';
 },{passive:true});
+if(toTopBtn) toTopBtn.onclick=()=>scrollTo({top:0,behavior:'smooth'});
 
 drawTasks(); drawUC();
+
+/* Mở thẳng đúng use case nếu trang được tải từ 1 link chia sẻ dạng .../#UC-028 */
+(function(){
+  const hid=decodeURIComponent((location.hash||'').replace(/^#/,''));
+  if(hid && UC_MAP[hid]) setTimeout(()=>openUCAt(hid), 0);
+})();
 
 }catch(err){
   try{
