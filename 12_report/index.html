@@ -232,6 +232,21 @@ footer{border-top:2px solid var(--ink);padding:22px 0 46px;font:11px var(--mono)
   box-shadow:0 3px 14px rgba(15,30,46,.28);display:none;align-items:center;justify-content:center;z-index:80}
 #toTop:hover{background:var(--brass)}
 
+/* ── LUỒNG QUY TRÌNH (Phần 03) ───────────────────── */
+.flow-toggle{cursor:pointer;font:600 11px var(--sans);text-transform:uppercase;letter-spacing:.06em;
+  color:var(--brass);padding:8px 0;user-select:none}
+.flow-toggle:hover{color:var(--ink)}
+.flow-note{font-size:12px;color:var(--ink-3);margin:2px 0 16px;max-width:70ch}
+.flow-block{margin-bottom:18px}
+.flow-block-h{font:600 11px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--ink);margin-bottom:8px}
+.flow-block-h .c{text-transform:none;letter-spacing:0;font-weight:400;color:var(--ink-3);margin-left:6px}
+.flow-row{display:flex;flex-wrap:wrap;align-items:center;gap:5px}
+.flow-node{display:inline-block;padding:6px 10px;border:1px solid var(--rule);border-radius:5px;
+  background:var(--panel);font-size:12px;color:var(--ink);cursor:default;line-height:1.35}
+.flow-node.big{border-color:var(--brass);background:#FBF2E9}
+.flow-node b{font-weight:600}
+.flow-arw{color:var(--ink-3);font-size:13px;flex:0 0 auto}
+
 /* ── SƠ ĐỒ PHỤ THUỘC (Phần 06) ───────────────────── */
 .depgraph{overflow-x:auto;margin-bottom:14px}
 .depgraph svg{display:block}
@@ -320,6 +335,13 @@ footer{border-top:2px solid var(--ink);padding:22px 0 46px;font:11px var(--mono)
           <span class="tag fact" style="margin:0 4px 0 14px">FACT</span>xác minh được — có tài liệu thật xác nhận
           <span class="tag infer" style="margin:0 4px 0 14px">INFERENCE</span>suy luận — chưa có nguồn riêng cho VN, suy từ mẫu chung
         </p>
+        <details id="flowDetails">
+          <summary class="flow-toggle">🔀 Xem theo luồng quy trình (gộp 87 tác vụ thành các chặng theo khối)</summary>
+          <p class="flow-note">Thứ tự các ô đúng theo cách tài liệu trình bày cho từng khối, <b>không phải quan hệ trước-sau đã được kiểm chứng</b>
+            (khác với sơ đồ phụ thuộc use case ở Phần 06 vốn có căn cứ dữ liệu cụ thể cho từng mũi tên). Ô viền vàng gộp nhiều tác vụ cùng nhóm chủ đề —
+            rê chuột để xem danh sách. Bấm mã tác vụ trong bảng bên dưới để xem chi tiết từng tác vụ riêng lẻ.</p>
+          <div id="taskFlow"></div>
+        </details>
         <div class="controls">
           <select id="tBlk"></select>
           <select id="tTag"><option value="">Mọi nhãn</option><option value="REG">REG — quy định</option><option value="FACT">FACT — xác minh được</option><option value="INFERENCE">INFERENCE — suy luận</option></select>
@@ -563,6 +585,28 @@ const tagCls = v => v==='REG'?'reg':v==='FACT'?'fact':'infer';
 const TAG_VI = {'REG':'Quy định — trích thẳng từ luật/thông tư, bắt buộc',
   'FACT':'Xác minh được — có tài liệu thật xác nhận (JD, bản cáo bạch...)',
   'INFERENCE':'Suy luận — chưa có nguồn riêng cho VN, suy từ mẫu chung ngành'};
+
+/* ── luồng quy trình (gộp tác vụ liên tiếp cùng quy_trinh_cap2 thành 1 chặng) ── */
+function renderTaskFlow(){
+  const el=document.getElementById('taskFlow'); if(!el) return;
+  el.innerHTML = [...new Set(TASKS.map(t=>t.khoi_chuc_nang))].map(blk=>{
+    const ts=TASKS.filter(t=>t.khoi_chuc_nang===blk); // giữ nguyên thứ tự trong task_registry.csv
+    const stages=[];
+    ts.forEach(t=>{
+      const last=stages[stages.length-1];
+      if(last && last.name===t.quy_trinh_cap2) last.tasks.push(t);
+      else stages.push({name:t.quy_trinh_cap2||t.tac_vu_cap3||t.task_id, tasks:[t]});
+    });
+    const nodes=stages.map(s=>{
+      const big=s.tasks.length>1;
+      const ids=s.tasks.map(t=>t.task_id).join(', ');
+      const detail=s.tasks.map(t=>t.tac_vu_cap3||t.mo_ta_ngan).join(' · ');
+      return `<span class="flow-node${big?' big':''}" title="${esc(ids)} — ${esc(detail)}"><b>${esc(s.name)}</b>${big?` <span style="color:var(--ink-3)">(${s.tasks.length} tác vụ)</span>`:''}</span>`;
+    });
+    return `<div class="flow-block"><div class="flow-block-h">${blockHtml(blk)}<span class="c">${stages.length} chặng · ${ts.length} tác vụ</span></div>
+      <div class="flow-row">${nodes.join('<span class="flow-arw">→</span>')}</div></div>`;
+  }).join('');
+}
 
 /* ── bảng tác vụ ── */
 function drawTasks(){
@@ -956,7 +1000,7 @@ addEventListener('scroll',()=>{
 },{passive:true});
 if(toTopBtn) toTopBtn.onclick=()=>scrollTo({top:0,behavior:'smooth'});
 
-drawTasks(); drawUC();
+drawTasks(); drawUC(); renderTaskFlow();
 
 /* Mở thẳng đúng use case nếu trang được tải từ 1 link chia sẻ dạng .../#UC-028 */
 (function(){
