@@ -268,11 +268,14 @@ footer{border-top:2px solid var(--ink);padding:22px 0 46px;font:11px var(--mono)
     <h1>Cơ hội ứng dụng AI trong vận hành quỹ đầu tư</h1>
     <p class="dek">Khảo sát 4 khối chức năng tầng Back Office của công ty quản lý quỹ tại Việt Nam: 87 tác vụ vận hành được bóc tách từ nguồn sơ cấp, 43 cơ hội ứng dụng AI được chấm điểm và xếp thứ tự ưu tiên.</p>
     <div style="margin-top:14px;padding:8px 12px;background:var(--rule-2);border-radius:4px;display:inline-block;font:12.5px var(--sans);color:var(--ink-2)">
-      <strong style="color:var(--ink)">Chú giải nhanh:</strong> 
+      <strong style="color:var(--ink)">Chú giải nhanh:</strong>
       <span style="margin-left:8px"><b>NAV</b> (Giá trị tài sản ròng)</span>
       <span style="margin-left:12px"><b>CCQ</b> (Chứng chỉ quỹ)</span>
       <span style="margin-left:12px"><b>VSDC</b> (Trung tâm Lưu ký và Bù trừ CK VN)</span>
       <span style="margin-left:12px"><b>TT98</b> (Thông tư 98/2020/TT-BTC)</span>
+      <span style="margin-left:12px"><b>REG</b> (nhãn nguồn: nghĩa vụ pháp lý bắt buộc — trích thẳng từ luật/thông tư)</span>
+      <span style="margin-left:12px"><b>FACT</b> (nhãn nguồn: xác minh được — có tài liệu thật xác nhận, không phải luật)</span>
+      <span style="margin-left:12px"><b>INFERENCE</b> (nhãn nguồn: suy luận — chưa có nguồn riêng cho VN, suy từ mẫu chung ngành)</span>
     </div>
     <p class="byline">Chốt dữ liệu 17/08/2026  ·  87 tác vụ  ·  43 use case  ·  35 nguồn  ·  4/8 khối chức năng</p>
   </header>
@@ -312,6 +315,11 @@ footer{border-top:2px solid var(--ink);padding:22px 0 46px;font:11px var(--mono)
         <div class="eyebrow">Phần 03</div>
         <h2>Bản đồ tác vụ</h2>
         <p class="lede">Các tác vụ được bóc tách từ văn bản pháp luật, bản cáo bạch, mô tả công việc và quyết định xử phạt. Nhãn cho biết mức độ chắc chắn của nguồn.</p>
+        <p style="font-size:12.5px;color:var(--ink-3);margin:-10px 0 16px">
+          <span class="tag reg" style="margin-right:4px">REG</span>quy định — trích thẳng từ luật/thông tư, bắt buộc
+          <span class="tag fact" style="margin:0 4px 0 14px">FACT</span>xác minh được — có tài liệu thật xác nhận
+          <span class="tag infer" style="margin:0 4px 0 14px">INFERENCE</span>suy luận — chưa có nguồn riêng cho VN, suy từ mẫu chung
+        </p>
         <div class="controls">
           <select id="tBlk"></select>
           <select id="tTag"><option value="">Mọi nhãn</option><option value="REG">REG — quy định</option><option value="FACT">FACT — xác minh được</option><option value="INFERENCE">INFERENCE — suy luận</option></select>
@@ -322,7 +330,7 @@ footer{border-top:2px solid var(--ink);padding:22px 0 46px;font:11px var(--mono)
           <span class="tally" id="tTally"></span>
         </div>
         <div class="tbl-wrap"><table><thead><tr>
-          <th style="width:92px">Mã</th><th>Tác vụ</th><th style="width:96px">Nhãn</th><th style="width:34%">Điểm gãy đã xác minh</th>
+          <th style="width:92px">Mã</th><th>Tác vụ</th><th style="width:96px" title="REG=quy định · FACT=xác minh được · INFERENCE=suy luận — xem chú thích phía trên bảng">Nhãn</th><th style="width:34%">Điểm gãy đã xác minh</th>
         </tr></thead><tbody id="tBody"></tbody></table></div>
       </section>
 
@@ -552,6 +560,9 @@ fillSel('uBlk','Mọi khối chức năng',BLOCKS);
 fillSel('uCap','Mọi năng lực AI',[...new Set(USECASES.map(u=>u.nang_luc_ai))].sort());
 
 const tagCls = v => v==='REG'?'reg':v==='FACT'?'fact':'infer';
+const TAG_VI = {'REG':'Quy định — trích thẳng từ luật/thông tư, bắt buộc',
+  'FACT':'Xác minh được — có tài liệu thật xác nhận (JD, bản cáo bạch...)',
+  'INFERENCE':'Suy luận — chưa có nguồn riêng cho VN, suy từ mẫu chung ngành'};
 
 /* ── bảng tác vụ ── */
 function drawTasks(){
@@ -570,7 +581,7 @@ function drawTasks(){
       html+=`<tr><td class="uid">${esc(t.task_id)}</td>
         <td><div class="name">${esc(t.tac_vu_cap3||t.mo_ta_ngan)}</div>
         ${t.mo_ta_ngan&&t.mo_ta_ngan!==t.tac_vu_cap3?`<div class="sub">${esc(t.mo_ta_ngan)}</div>`:''}</td>
-        <td><span class="tag ${tagCls(t['do_tin_cay(FACT/INFERENCE)'])}">${esc(t['do_tin_cay(FACT/INFERENCE)'])}</span></td>
+        <td><span class="tag ${tagCls(t['do_tin_cay(FACT/INFERENCE)'])}" title="${esc(TAG_VI[t['do_tin_cay(FACT/INFERENCE)']]||'')}">${esc(t['do_tin_cay(FACT/INFERENCE)'])}</span></td>
         <td class="pp ${pp?'':'none'}">${pp?esc(pp):'chưa xác minh — cần phỏng vấn'}</td></tr>`;
     });
   });
